@@ -7,7 +7,7 @@ import java.util.Arrays;
  *
  * @author Alfonso
  */
-public enum Adyacencia {
+public enum Matriz {
     adj1(new int[]{0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0}),
     adj2(new int[]{1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0}),
     adj3(new int[]{1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0}),
@@ -22,7 +22,7 @@ public enum Adyacencia {
 
     private final int[] adyacentes;
 
-    private Adyacencia(int[] adyacentes) {
+    private Matriz(int[] adyacentes) {
         this.adyacentes = adyacentes;
     }
 
@@ -31,7 +31,7 @@ public enum Adyacencia {
     }
 
     public static void mostrarMatriz() {
-        for (Adyacencia value : values()) {
+        for (Matriz value : values()) {
             System.out.println(value.getAdyacentes());
         }
     }
