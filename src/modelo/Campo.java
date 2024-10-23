@@ -31,27 +31,23 @@ public class Campo {
     }
 
     // Método para realizar el recorrido basado en velocidad
-    public void recorridoVelocidad(String nombre1, String nombre2) {
+    public ArrayList<Jugador> recorridoVelocidad(String nombre1, String nombre2) {
         Jugador jugadorInicial = getJugador(nombre1);
         Jugador jugadorFinal = getJugador(nombre2);
 
         if (jugadorInicial == null || jugadorFinal == null) {
             System.out.println("Jugador no encontrado.");
-            return;
+            return null;
         }
 
-        ArrayList<String> caminoOptimo = encontrarCaminoOptimo(jugadorInicial, jugadorFinal, "velocidad");
+        ArrayList<Jugador> caminoOptimo = encontrarCaminoOptimo(jugadorInicial, jugadorFinal, "velocidad");
 
-        // Imprimir el camino (o realizar otras acciones)
-        if (caminoOptimo != null) {
-            System.out.println("Camino óptimo basado en velocidad: " + caminoOptimo);
-        } else {
-            System.out.println("No se encontró un camino.");
-        }
+        // Devolver el camino (o realizar otras acciones)
+        return caminoOptimo;
     }
 
     // Método para encontrar el camino óptimo basado en un atributo (velocidad, posesión, remate)
-    private ArrayList<String> encontrarCaminoOptimo(Jugador jugadorInicial, Jugador jugadorFinal, String criterio) {
+    private ArrayList<Jugador> encontrarCaminoOptimo(Jugador jugadorInicial, Jugador jugadorFinal, String criterio) {
         int numJugadores = jugadores.size();
         boolean[] visitado = new boolean[numJugadores];
         int[] distancias = new int[numJugadores];
@@ -67,7 +63,9 @@ public class Campo {
 
         while (!colaPrioridad.isEmpty()) {
             int indiceActual = colaPrioridad.poll();
-            if (visitado[indiceActual]) continue;
+            if (visitado[indiceActual]) {
+                continue;
+            }
             visitado[indiceActual] = true;
 
             for (int i = 0; i < numJugadores; i++) {
@@ -92,57 +90,48 @@ public class Campo {
         }
 
         // Reconstruir el camino desde el jugadorFinal
-        ArrayList<String> camino = new ArrayList<>();
+        ArrayList<Jugador> camino = new ArrayList<>();
         int indiceFinal = jugadores.indexOf(jugadorFinal);
         for (int at = indiceFinal; at != -1; at = predecesores[at]) {
-            camino.add(0, jugadores.get(at).getNombre()); // Agregar al principio
+            camino.add(0, jugadores.get(at)); // Agregar al principio
         }
 
         // Verificar si se encontró un camino
-        if (camino.size() == 1 && !camino.get(0).equals(jugadorInicial.getNombre())) {
+        if (camino.size() == 1 && !camino.get(0).equals(jugadorInicial)) {
             return null; // No se encontró camino
         }
         return camino;
     }
 
-    // Método para realizar el recorrido basado en posesión
-    public void recorridoPosesion(String nombre1, String nombre2) {
+// Método para realizar el recorrido basado en posesión
+    public ArrayList<Jugador> recorridoPosesion(String nombre1, String nombre2) {
         Jugador jugadorInicial = getJugador(nombre1);
         Jugador jugadorFinal = getJugador(nombre2);
 
         if (jugadorInicial == null || jugadorFinal == null) {
             System.out.println("Jugador no encontrado.");
-            return;
+            return null;
         }
 
-        ArrayList<String> caminoOptimo = encontrarCaminoOptimo(jugadorInicial, jugadorFinal, "posesión");
+        ArrayList<Jugador> caminoOptimo = encontrarCaminoOptimo(jugadorInicial, jugadorFinal, "posesión");
 
-        // Imprimir el camino (o realizar otras acciones)
-        if (caminoOptimo != null) {
-            System.out.println("Camino óptimo basado en posesión: " + caminoOptimo);
-        } else {
-            System.out.println("No se encontró un camino.");
-        }
+        // Devolver el camino (o realizar otras acciones)
+        return caminoOptimo;
     }
 
-    // Método para realizar el recorrido basado en remate
-    public void recorridoRemate(String nombre1, String nombre2) {
+// Método para realizar el recorrido basado en remate
+    public ArrayList<Jugador> recorridoRemate(String nombre1, String nombre2) {
         Jugador jugadorInicial = getJugador(nombre1);
         Jugador jugadorFinal = getJugador(nombre2);
 
         if (jugadorInicial == null || jugadorFinal == null) {
             System.out.println("Jugador no encontrado.");
-            return;
+            return null;
         }
 
-        ArrayList<String> caminoOptimo = encontrarCaminoOptimo(jugadorInicial, jugadorFinal, "remate");
+        ArrayList<Jugador> caminoOptimo = encontrarCaminoOptimo(jugadorInicial, jugadorFinal, "remate");
 
-        // Imprimir el camino (o realizar otras acciones)
-        if (caminoOptimo != null) {
-            System.out.println("Camino óptimo basado en remate: " + caminoOptimo);
-        } else {
-            System.out.println("No se encontró un camino.");
-        }
+        // Devolver el camino (o realizar otras acciones)
+        return caminoOptimo;
     }
 }
-
