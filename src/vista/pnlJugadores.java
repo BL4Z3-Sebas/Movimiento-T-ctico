@@ -1,10 +1,10 @@
-package vista;
+package vista; 
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
 import modelo.Circulo;
+import modelo.Formaciones;
 import static modelo.Formaciones.s352;
 import static modelo.Formaciones.s4231;
 import static modelo.Formaciones.s433;
@@ -16,16 +16,14 @@ import static modelo.Formaciones.s442;
  */
 public class pnlJugadores extends javax.swing.JPanel {
 
+    ArrayList<Circulo> jugadores;
+
     /**
      * Creates new form pnlCancha
      */
-    ImageIcon lineas = new ImageIcon("imagenes/lineas_blancas.png");
-    ArrayList<Circulo> jugadores;
-
     public pnlJugadores() {
         initComponents();
         jugadores = new ArrayList<>();
-        mostraJugadores('d');
         revalidate();
         repaint();
     }
@@ -50,7 +48,6 @@ public class pnlJugadores extends javax.swing.JPanel {
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
         jugadores.add(new Circulo(evt.getX(), evt.getY(), 20, Color.BLUE));
-        this.removeAll();
         System.out.println(evt.getX() + ", " + evt.getY());
         repaint();
     }//GEN-LAST:event_formMouseClicked
@@ -58,41 +55,6 @@ public class pnlJugadores extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-    private void mostraJugadores(char formacion) {
-        switch (formacion) {
-            case 'a':
-                for (int[] pos : s442.getFormacion()) {
-                    jugadores.add(new Circulo(pos[0], pos[1], 20, Color.red));
-                }
-                repaint();
-                break;
-
-            case 'b':
-                for (int[] pos : s4231.getFormacion()) {
-                    jugadores.add(new Circulo(pos[0], pos[1], 20, Color.red));
-                }
-                repaint();
-                break;
-
-            case 'c':
-                for (int[] pos : s352.getFormacion()) {
-                    jugadores.add(new Circulo(pos[0], pos[1], 20, Color.red));
-                }
-                repaint();
-                break;
-                
-            case 'd':
-                for (int[] pos : s433.getFormacion()) {
-                    jugadores.add(new Circulo(pos[0], pos[1], 20, Color.red));
-                }
-                repaint();
-                break;
-
-            default:
-                System.out.println("Formación no válida.");
-        }
-    }
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -100,4 +62,36 @@ public class pnlJugadores extends javax.swing.JPanel {
             jugador.dibujar(g);
         }
     }
+
+    private void dibujarCirculos(Formaciones formacion) {
+        for (int[] pos : formacion.getFormacion()) {
+            jugadores.add(new Circulo(pos[0], pos[1], 15, Color.red));
+        }
+    }
+
+    public void mostraJugadores(char formacion) {
+        jugadores.clear();
+        switch (formacion) {
+            case 'a':
+                dibujarCirculos(s442);
+                break;
+
+            case 'b':
+                dibujarCirculos(s4231);
+                break;
+
+            case 'c':
+                dibujarCirculos(s352);
+                break;
+
+            case 'd':
+                dibujarCirculos(s433);
+                break;
+
+            default:
+                System.out.println("Formación no válida.");
+        }
+        repaint();
+    }
+
 }

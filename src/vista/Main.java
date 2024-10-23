@@ -3,10 +3,7 @@ package vista;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
 import java.awt.Image;
-import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import modelo.Circulo;
-import static modelo.Formaciones.s433;
 
 /**
  *
@@ -14,14 +11,13 @@ import static modelo.Formaciones.s433;
  */
 public class Main extends javax.swing.JFrame {
 
+    ImageIcon cesped = new ImageIcon("imagenes/cesped_p.jpg");
+    ImageIcon lineas = new ImageIcon("imagenes/lineas_blancas.png");
+    pnlJugadores cancha;
+
     /**
      * Creates new form Main
      */
-    ImageIcon cesped = new ImageIcon("imagenes/cesped_p.jpg");
-    ImageIcon lineas = new ImageIcon("imagenes/lineas_blancas.png");
-    ArrayList<Circulo> jugadores;
-    pnlJugadores cancha;
-
     public Main() {
         initComponents();
         cancha = new pnlJugadores();
@@ -31,11 +27,12 @@ public class Main extends javax.swing.JFrame {
 
         pnlCampo.setSize(1366, 768);
         pnlCampo.setLocation(0, 0);
-        jPanel2.add(cancha);
-        jPanel2.add(pnlCampo);
-        jugadores = new ArrayList<>();
-        revalidate();
-        repaint();
+
+        pnlMenu.setSize(660, 688);
+        pnlMenu.setLocation(74, 40);
+        pnlBG.add(pnlMenu);
+        pnlBG.add(cancha);
+        pnlBG.add(pnlCampo);
 
     }
 
@@ -52,7 +49,13 @@ public class Main extends javax.swing.JFrame {
         pnlSombra = new javax.swing.JPanel();
         lblCancha = new javax.swing.JLabel();
         pnlCesped = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        pnlMenu = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        pnlSombra1 = new javax.swing.JPanel();
+        pnlBG = new javax.swing.JPanel();
+        lblCerrar = new javax.swing.JLabel();
 
         pnlCampo.setLayout(null);
 
@@ -60,7 +63,7 @@ public class Main extends javax.swing.JFrame {
         pnlSombra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         pnlSombra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblCancha.setIcon(new ImageIcon(lineas.getImage().getScaledInstance(576, 768, Image.SCALE_DEFAULT)));
+        lblCancha.setIcon(new ImageIcon(lineas.getImage().getScaledInstance(576, 768, Image.SCALE_SMOOTH)));
         lblCancha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblCanchaMouseClicked(evt);
@@ -75,22 +78,71 @@ public class Main extends javax.swing.JFrame {
         pnlCampo.add(pnlCesped);
         pnlCesped.setBounds(0, 0, 1366, 768);
 
+        pnlMenu.setBackground(new Color(0, 0, 0, 70));
+        pnlMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Footlight MT Light", 1, 56)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 204, 51));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Movimiento Táctico");
+        pnlMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 80));
+
+        jButton1.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 204));
+        jButton1.setText("Formacion A");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 410, -1, -1));
+
+        jButton2.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 204));
+        jButton2.setText("Formacion B");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 410, -1, -1));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1366, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 768, Short.MAX_VALUE)
-        );
+        pnlSombra1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        pnlSombra1.setOpaque(false);
+        pnlSombra1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(pnlSombra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(776, 40, 516, 688));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 768));
+        pnlBG.setLayout(null);
+
+        lblCerrar.setBackground(new java.awt.Color(102, 0, 0));
+        lblCerrar.setFont(new java.awt.Font("Papyrus", 0, 36)); // NOI18N
+        lblCerrar.setForeground(new java.awt.Color(255, 255, 255));
+        lblCerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCerrar.setText("×");
+        lblCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCerrarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblCerrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblCerrarMouseExited(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblCerrarMouseReleased(evt);
+            }
+        });
+        pnlBG.add(lblCerrar);
+        lblCerrar.setBounds(1326, 0, 40, 25);
+
+        getContentPane().add(pnlBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 768));
 
         pack();
         setLocationRelativeTo(null);
@@ -100,6 +152,46 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.out.println(evt.getX() + ", " + evt.getY());
     }//GEN-LAST:event_lblCanchaMouseClicked
+
+    private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_lblCerrarMouseClicked
+
+    private void lblCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseEntered
+        // TODO add your handling code here:
+        lblCerrar.setOpaque(true);
+        lblCerrar.setBackground(new Color(204, 0, 0));
+        lblCerrar.setForeground(new Color(255, 255, 255));
+        repaint();
+    }//GEN-LAST:event_lblCerrarMouseEntered
+
+    private void lblCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseExited
+        // TODO add your handling code here:
+        lblCerrar.setOpaque(false);
+        repaint();
+    }//GEN-LAST:event_lblCerrarMouseExited
+
+    private void lblCerrarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseReleased
+        // TODO add your handling code here:
+        if (lblCerrar.contains(evt.getX(), evt.getY())) {
+            lblCerrarMouseClicked(evt);
+        }
+    }//GEN-LAST:event_lblCerrarMouseReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        cancha.mostraJugadores('a');
+        revalidate();
+        repaint();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        cancha.mostraJugadores('b');
+        revalidate();
+        repaint();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,11 +206,18 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblCancha;
+    private javax.swing.JLabel lblCerrar;
+    private javax.swing.JPanel pnlBG;
     private javax.swing.JPanel pnlCampo;
     private javax.swing.JLabel pnlCesped;
+    private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlSombra;
+    private javax.swing.JPanel pnlSombra1;
     // End of variables declaration//GEN-END:variables
 
+    //Fuente para el menu principal Footlight o Goudy Old Style
 }

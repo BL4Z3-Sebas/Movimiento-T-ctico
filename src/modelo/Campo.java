@@ -1,6 +1,5 @@
-package modelo;
+package modelo; 
 
-import modelo.Camino;
 import java.util.ArrayList;
 /**
  *

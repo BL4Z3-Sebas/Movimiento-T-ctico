@@ -1,7 +1,6 @@
 package vista;
 
-import modelo.Adyacencia;
-import modelo.Equipo;
+import Modelo.ManejadorEquipos;
 
 /**
  *
@@ -10,7 +9,7 @@ import modelo.Equipo;
 public class Movimiento_Tactico {
 
     public static void main(String[] args) {
-        Equipo.mostrarEquipo();
-        Adyacencia.mostrarMatriz();
+        System.out.println(ManejadorEquipos.equipoSiguiente("Equipo7"));
+        System.out.println(ManejadorEquipos.equipoAnterior("Equipo7"));
     }    
 }
