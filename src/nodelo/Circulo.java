@@ -1,4 +1,4 @@
-package modelo;
+package nodelo;
 
 import java.awt.Color;
 import java.awt.Graphics;

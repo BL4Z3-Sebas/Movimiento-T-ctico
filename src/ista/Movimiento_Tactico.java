@@ -1,9 +1,9 @@
-package vista;
+package ista; 
 
-import java.util.ArrayList;
+
 import java.util.List;
-import modelo.Campo;
-import modelo.Jugador;
+
+import nodelo.Jugador;
 import reader.LeerJugadores;
 import reader.LeerMatriz;
 
@@ -40,4 +40,3 @@ public class Movimiento_Tactico {
         //campo.recorridoRemate(jugadorInicial, jugadorFinal);
     }
 }
-
