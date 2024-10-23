@@ -53,6 +53,7 @@ public class Main extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         pnlSombra1 = new javax.swing.JPanel();
         pnlBG = new javax.swing.JPanel();
         lblCerrar = new javax.swing.JLabel();
@@ -80,13 +81,15 @@ public class Main extends javax.swing.JFrame {
 
         pnlMenu.setBackground(new Color(0, 0, 0, 70));
         pnlMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        pnlMenu.setMinimumSize(new java.awt.Dimension(660, 688));
+        pnlMenu.setPreferredSize(new java.awt.Dimension(680, 688));
         pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Footlight MT Light", 1, 56)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 51));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Movimiento Táctico");
-        pnlMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 80));
+        pnlMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 80));
 
         jButton1.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 204));
@@ -96,7 +99,7 @@ public class Main extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        pnlMenu.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 410, -1, -1));
+        pnlMenu.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 570, 140, 30));
 
         jButton2.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 204));
@@ -106,7 +109,11 @@ public class Main extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        pnlMenu.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 410, -1, -1));
+        pnlMenu.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 570, 140, 30));
+
+        jLabel2.setFont(new java.awt.Font("Footlight MT Light", 0, 24)); // NOI18N
+        jLabel2.setText("Seleccionar equipo");
+        pnlMenu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 260, 40));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -209,6 +216,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblCancha;
     private javax.swing.JLabel lblCerrar;
     private javax.swing.JPanel pnlBG;
