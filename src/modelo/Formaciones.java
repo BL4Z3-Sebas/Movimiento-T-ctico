@@ -1,4 +1,4 @@
-package nodelo;
+package modelo;
 
 /**
  *

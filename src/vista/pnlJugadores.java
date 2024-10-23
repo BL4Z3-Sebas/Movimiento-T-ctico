@@ -1,14 +1,14 @@
-package ista;
+package vista;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import nodelo.Circulo;
-import nodelo.Formaciones;
-import static nodelo.Formaciones.s352;
-import static nodelo.Formaciones.s4231;
-import static nodelo.Formaciones.s433;
-import static nodelo.Formaciones.s442;
+import modelo.Circulo;
+import modelo.Formaciones;
+import static modelo.Formaciones.s352;
+import static modelo.Formaciones.s4231;
+import static modelo.Formaciones.s433;
+import static modelo.Formaciones.s442;
 
 /**
  *

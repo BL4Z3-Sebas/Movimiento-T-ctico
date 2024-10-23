@@ -9,7 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import nodelo.Jugador;
+import modelo.Jugador;
 
 public class LeerJugadores {
     

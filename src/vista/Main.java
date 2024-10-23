@@ -1,4 +1,4 @@
-package ista;
+package vista;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;

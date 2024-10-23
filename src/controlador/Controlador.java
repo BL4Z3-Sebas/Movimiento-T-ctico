@@ -1,7 +1,7 @@
 package controlador; 
 
-import nodelo.ManejadorEquipos;
-import ista.Main;
+import modelo.ManejadorEquipos;
+import vista.Main;
 
 /**
  *

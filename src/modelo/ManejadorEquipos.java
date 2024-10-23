@@ -1,10 +1,10 @@
-package nodelo;
+package modelo;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-import nodelo.Jugador;
+import modelo.Jugador;
 
 /**
  *

@@ -1,9 +1,9 @@
-package ista; 
+package vista; 
 
 
 import java.util.List;
 
-import nodelo.Jugador;
+import modelo.Jugador;
 import reader.LeerJugadores;
 import reader.LeerMatriz;
 
