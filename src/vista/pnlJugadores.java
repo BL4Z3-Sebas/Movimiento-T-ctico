@@ -49,7 +49,9 @@ public class pnlJugadores extends javax.swing.JPanel {
         // TODO add your handling code here:
         jugadores.add(new Circulo(evt.getX(), evt.getY(), 20, Color.BLUE));
         System.out.println(evt.getX() + ", " + evt.getY());
+        revalidate();
         repaint();
+        this.getParent().repaint();
     }//GEN-LAST:event_formMouseClicked
 
 
