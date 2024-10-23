@@ -1,6 +1,6 @@
-package vista;
+package vista; 
 
-import Modelo.ManejadorEquipos;
+import modelo.ManejadorEquipos;
 
 /**
  *
