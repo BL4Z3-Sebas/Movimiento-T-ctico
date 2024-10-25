@@ -22,5 +22,6 @@ public class TransparentPanelExample {
         // Establecer el layout del frame y hacer visible
         frame.setLayout(new FlowLayout());
         frame.setVisible(true);
+        
     }
 }

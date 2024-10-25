@@ -1,9 +1,11 @@
 package vista;
 
+import radar.DiagramaRadar;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import radar.DiagramaRadar2;
 
 /**
  *
@@ -14,6 +16,8 @@ public class Main extends javax.swing.JFrame {
     ImageIcon cesped = new ImageIcon("imagenes/cesped_p.jpg");
     ImageIcon lineas = new ImageIcon("imagenes/lineas_blancas.png");
     pnlJugadores cancha;
+    DiagramaRadar2 radar2;
+    DiagramaRadar radar;
 
     /**
      * Creates new form Main
@@ -30,10 +34,24 @@ public class Main extends javax.swing.JFrame {
 
         pnlMenu.setSize(660, 688);
         pnlMenu.setLocation(74, 40);
+
+        radar2 = new DiagramaRadar2(80, 40, 90);
+        radar2.setSize(500, 300);
+        radar2.setLocation(120, 100);
+        radar2.setOpaque(true);
+        radar2.setBackground(new Color(0, 0, 0, 10));
+
+        radar = new DiagramaRadar();
+        radar.setSize(500, 300);
+        radar.setLocation(120, 200);
+        radar.setBackground(new Color(0, 0, 0, 0));
+        radar.repaint();
+        
         pnlBG.add(pnlMenu);
         pnlBG.add(cancha);
         pnlBG.add(pnlCampo);
-
+//        pnlBG.add(radar2);
+        pnlBG.add(radar);
     }
 
     /**
@@ -162,7 +180,7 @@ public class Main extends javax.swing.JFrame {
 
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
         // TODO add your handling code here:
-        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_lblCerrarMouseClicked
 
     private void lblCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseEntered
