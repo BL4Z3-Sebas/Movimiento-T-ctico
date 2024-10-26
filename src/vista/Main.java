@@ -80,7 +80,7 @@ public class Main extends javax.swing.JFrame {
 
         pnlSombra.setBackground(new Color(0, 0, 0, 70));
         pnlSombra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        pnlSombra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlSombra.setLayout(null);
 
         lblCancha.setIcon(new ImageIcon(lineas.getImage().getScaledInstance(576, 768, Image.SCALE_SMOOTH)));
         lblCancha.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -88,7 +88,8 @@ public class Main extends javax.swing.JFrame {
                 lblCanchaMouseClicked(evt);
             }
         });
-        pnlSombra.add(lblCancha, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -40, 576, 768));
+        pnlSombra.add(lblCancha);
+        lblCancha.setBounds(-30, -40, 576, 768);
 
         pnlCampo.add(pnlSombra);
         pnlSombra.setBounds(776, 40, 516, 688);

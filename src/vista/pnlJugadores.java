@@ -42,14 +42,16 @@ public class pnlJugadores extends javax.swing.JPanel {
                 formMouseClicked(evt);
             }
         });
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setLayout(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
         jugadores.add(new Circulo(evt.getX(), evt.getY(), 20, Color.BLUE));
         System.out.println(evt.getX() + ", " + evt.getY());
+        revalidate();
         repaint();
+        this.getParent().repaint();
     }//GEN-LAST:event_formMouseClicked
 
 
