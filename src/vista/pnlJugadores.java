@@ -1,7 +1,9 @@
-package recursos;
+package vista;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import modelo.Circulo;
 import modelo.Formaciones;
@@ -17,6 +19,7 @@ import static modelo.Formaciones.s442;
 public class pnlJugadores extends javax.swing.JPanel {
 
     ArrayList<Circulo> jugadores;
+    int[][] matriz_adyacencia;
 
     /**
      * Creates new form pnlCancha
@@ -61,13 +64,13 @@ public class pnlJugadores extends javax.swing.JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         for (Circulo jugador : jugadores) {
-            jugador.dibujar(g);
+            dibujarEquipo(g);
         }
     }
 
-    private void dibujarCirculos(Formaciones formacion) {
+    private void crearCirculos(Formaciones formacion) {
         for (int[] pos : formacion.getFormacion()) {
-            jugadores.add(new Circulo(pos[0], pos[1], 15, Color.red));
+            jugadores.add(new Circulo(pos[0], pos[1], 15, Color.BLUE));
         }
     }
 
@@ -75,25 +78,41 @@ public class pnlJugadores extends javax.swing.JPanel {
         jugadores.clear();
         switch (formacion) {
             case 442:
-                dibujarCirculos(s442);
+                crearCirculos(s442);
                 break;
 
             case 4231:
-                dibujarCirculos(s4231);
+                crearCirculos(s4231);
                 break;
 
             case 352:
-                dibujarCirculos(s352);
+                crearCirculos(s352);
                 break;
 
             case 433:
-                dibujarCirculos(s433);
+                crearCirculos(s433);
                 break;
 
             default:
                 System.out.println("Formación no válida.");
         }
         repaint();
+    }
+
+    public void dibujarEquipo(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setStroke(new BasicStroke(2));
+        for (int i = 0; i < 11; i++) {
+            Circulo c1 = jugadores.get(i);
+            g2.setColor(new Color(255, 219, 54));
+            for (int j = i; j < 11; j++) {
+                Circulo c2 = jugadores.get(j);
+                if (matriz_adyacencia[i][j] == 1) {
+                    g2.drawLine(c1.getX(), c1.getY(), c2.getX(), c2.getY());
+                }
+            }
+            c1.dibujar(g);
+        }
     }
 
 }

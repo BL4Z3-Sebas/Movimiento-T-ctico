@@ -1,4 +1,4 @@
-package recursos;
+package vista;
 
 import radar.pnlRadar;
 import com.formdev.flatlaf.FlatDarkLaf;
@@ -26,7 +26,7 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
-        campo = mc.crearCampo(null, 1);
+        campo = new Campo();
         cancha = new pnlJugadores();
         cancha.setSize(516, 688);
         cancha.setLocation(776, 40);
@@ -42,7 +42,6 @@ public class Main extends javax.swing.JFrame {
         radar.setSize(500, 300);
         radar.setLocation(154, 280);
         radar.setBackground(new Color(0, 0, 0, 0));
-        radar.actualizarGrafico(campo.getPromedio());
 
         pnlBG.add(radar);
         pnlBG.add(pnlMenu);
@@ -143,7 +142,6 @@ public class Main extends javax.swing.JFrame {
         lblEquipo.setFont(new java.awt.Font("Footlight MT Light", 0, 28)); // NOI18N
         lblEquipo.setForeground(new java.awt.Color(255, 255, 255));
         lblEquipo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblEquipo.setText("Equipo 1");
         lblEquipo.setOpaque(true);
         pnlMenu.add(lblEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 260, 40));
 
@@ -221,6 +219,7 @@ public class Main extends javax.swing.JFrame {
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
         campo = mc.crearCampo(campo.getNombre(), ManejadorCampo.SIGUIENTE);
+        cancha.matriz_adyacencia = campo.getMatrizAdyacencia();
         cancha.mostraJugadores(campo.getFormacion());
         radar.actualizarGrafico(campo.getPromedio());
         lblEquipo.setText(campo.getNombre());
@@ -231,6 +230,7 @@ public class Main extends javax.swing.JFrame {
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
         // TODO add your handling code here:
         campo = mc.crearCampo(campo.getNombre(), ManejadorCampo.ANTERIOR);
+        cancha.matriz_adyacencia = campo.getMatrizAdyacencia();
         cancha.mostraJugadores(campo.getFormacion());
         radar.actualizarGrafico(campo.getPromedio());
         lblEquipo.setText(campo.getNombre());

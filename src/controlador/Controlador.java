@@ -1,7 +1,7 @@
 package controlador; 
 
 import modelo.ManejadorEquipos;
-import recursos.Main;
+import vista.Main;
 
 /**
  *
