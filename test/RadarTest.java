@@ -1,3 +1,4 @@
+
 import javax.swing.JFrame;
 import java.awt.Graphics;
 import javax.swing.JPanel;
@@ -17,8 +18,8 @@ public class RadarTest {
                 super.paintComponent(g);
 
                 // Crear y dibujar radar en una ubicación cualquiera
-                Radar radar = new Radar(300, 300, 200, 50, 75, 90);
-                radar.dibujarRadar(g);
+//                Radar radar = new Radar(300, 300, 200, 50, 75, 90);
+//                radar.dibujarRadar(g);
             }
         };
 

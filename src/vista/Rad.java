@@ -7,18 +7,17 @@ import radar.Radar;
  *
  * @author Alfonso
  */
-public class pnlRadar extends javax.swing.JPanel {
+public class Rad extends javax.swing.JPanel {
 
-    Radar radar;
+    radar.Radar radar;
 
     /**
-     * Creates new form pnlRadar
+     * Creates new form Rad
      */
-    public pnlRadar() {
+    public Rad() {
         initComponents();
-//        radar = new Radar(250, 150, 140, 80, 60, 40);
-        revalidate();
-        repaint();
+        int radio = 80; // Ajusta el tamaño del radio como prefieras
+        radar = new Radar(200, 200, radio);
     }
 
     /**
@@ -42,16 +41,19 @@ public class pnlRadar extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        if (radar != null) {
-            radar.dibujarRadar(g);
-            radar.dibujarGrafico(g);
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        radar.dibujarRadar(g);
+        radar.dibujarGrafico(g);
+    }
+
+    public void actualizarGrafico(int velocidad, int posesion, int remate) {
+        radar.asignarDatosRadar(velocidad, posesion, remate);
+        repaint(); // Repinta el panel para mostrar el nuevo gráfico
+    }
+
 }

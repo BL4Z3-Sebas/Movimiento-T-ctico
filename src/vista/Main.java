@@ -18,6 +18,7 @@ public class Main extends javax.swing.JFrame {
     pnlJugadores cancha;
     DiagramaRadar2 radar2;
     DiagramaRadar radar;
+    Rad radar3;
 
     /**
      * Creates new form Main
@@ -46,12 +47,19 @@ public class Main extends javax.swing.JFrame {
         radar.setLocation(120, 200);
         radar.setBackground(new Color(0, 0, 0, 0));
         radar.repaint();
+
+        radar3 = new Rad();
+        radar3.setSize(500, 300);
+        radar3.setLocation(120, 100);
+        radar3.setBackground(new Color(0, 0, 0, 0));
+        radar3.actualizarGrafico(70, 80, 95);
         
+        pnlBG.add(radar3);
         pnlBG.add(pnlMenu);
         pnlBG.add(cancha);
         pnlBG.add(pnlCampo);
 //        pnlBG.add(radar2);
-        pnlBG.add(radar);
+//        pnlBG.add(radar);
     }
 
     /**
