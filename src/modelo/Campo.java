@@ -15,7 +15,7 @@ public class Campo {
 
     public Campo() {
         this.Jugadores = new ArrayList<>();
-        matrizAdyacencia = new int[11][11];
+//        matrizAdyacencia = new int[11][11];
     }
 
     // Método para agregar un jugador a la lista
@@ -82,12 +82,18 @@ public class Campo {
             for (int i = 0; i < numJugadores; i++) {
                 if (matrizAdyacencia[indiceActual][i] == 1 && !visitado[i]) {
                     int peso = 0;
-                    if (criterio.equals("velocidad")) {
-                        peso = Jugadores.get(i).getVelocidad();
-                    } else if (criterio.equals("posesión")) {
-                        peso = Jugadores.get(i).getPosesion();
-                    } else if (criterio.equals("remate")) {
-                        peso = Jugadores.get(i).getRemate();
+                    switch (criterio) {
+                        case "velocidad":
+                            peso = Jugadores.get(i).getVelocidad();
+                            break;
+                        case "posesión":
+                            peso = Jugadores.get(i).getPosesion();
+                            break;
+                        case "remate":
+                            peso = Jugadores.get(i).getRemate();
+                            break;
+                        default:
+                            break;
                     }
                     int nuevaDistancia = distancias[indiceActual] + peso;
 
@@ -130,7 +136,7 @@ public class Campo {
 //        recorridoVelocidadRecursivo(nombre1, nombre2, camino, 0);
 //
 //    }
-    public static int[][] generarMatrizAdyasencia(ArrayList<String> equipos) {
+    public static int[][] generarMatrizAdyacencia(ArrayList<String> equipos) {
         int[][] matriz = new int[11][11];
         for (String equipo : equipos) {
             String[] marcas = equipo.split(",");

@@ -35,7 +35,7 @@ public class Main extends javax.swing.JFrame {
 
         radar = new pnlRadar();
         radar.setSize(500, 300);
-        radar.setLocation(154, 240);
+        radar.setLocation(154, 280);
         radar.setBackground(new Color(0, 0, 0, 0));
         radar.actualizarGrafico(70, 20, 95);
 
@@ -60,8 +60,9 @@ public class Main extends javax.swing.JFrame {
         pnlCesped = new javax.swing.JLabel();
         pnlMenu = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
-        btnAnterior = new javax.swing.JButton();
+        btnAceptar = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
+        btnAnterior = new javax.swing.JButton();
         lblSeleccionar = new javax.swing.JLabel();
         lblEquipo = new javax.swing.JLabel();
         pnlSombra1 = new javax.swing.JPanel();
@@ -93,7 +94,7 @@ public class Main extends javax.swing.JFrame {
         pnlMenu.setBackground(new Color(0, 0, 0, 70));
         pnlMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         pnlMenu.setMinimumSize(new java.awt.Dimension(660, 688));
-        pnlMenu.setPreferredSize(new java.awt.Dimension(680, 688));
+        pnlMenu.setPreferredSize(new java.awt.Dimension(660, 688));
         pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitulo.setFont(new java.awt.Font("Footlight MT Light", 1, 56)); // NOI18N
@@ -102,15 +103,10 @@ public class Main extends javax.swing.JFrame {
         lblTitulo.setText("Movimiento Táctico");
         pnlMenu.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 80));
 
-        btnAnterior.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
-        btnAnterior.setForeground(new java.awt.Color(255, 255, 255));
-        btnAnterior.setText("< Anterior");
-        btnAnterior.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnteriorActionPerformed(evt);
-            }
-        });
-        pnlMenu.add(btnAnterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 140, 40));
+        btnAceptar.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
+        btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAceptar.setText("Aceptar");
+        pnlMenu.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 610, 140, 40));
 
         btnSiguiente.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
         btnSiguiente.setForeground(new java.awt.Color(255, 255, 255));
@@ -120,7 +116,17 @@ public class Main extends javax.swing.JFrame {
                 btnSiguienteActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 140, 40));
+        pnlMenu.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, 140, 40));
+
+        btnAnterior.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
+        btnAnterior.setForeground(new java.awt.Color(255, 255, 255));
+        btnAnterior.setText("< Anterior");
+        btnAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnteriorActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnAnterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 140, 40));
 
         lblSeleccionar.setBackground(new java.awt.Color(255, 255, 255));
         lblSeleccionar.setFont(new java.awt.Font("Footlight MT Light", 0, 24)); // NOI18N
@@ -134,7 +140,7 @@ public class Main extends javax.swing.JFrame {
         lblEquipo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEquipo.setText("Equipo 1");
         lblEquipo.setOpaque(true);
-        pnlMenu.add(lblEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 260, 40));
+        pnlMenu.add(lblEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 260, 40));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -209,15 +215,15 @@ public class Main extends javax.swing.JFrame {
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
-        cancha.mostraJugadores('a');
-        revalidate();
+        cancha.mostraJugadores(442);
+//        cancha.revalidate();
         repaint();
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
         // TODO add your handling code here:
-        cancha.mostraJugadores('b');
-        revalidate();
+        cancha.mostraJugadores(4231);
+//        cancha.revalidate();
         repaint();
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
@@ -234,6 +240,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JLabel lblCancha;
@@ -250,4 +257,7 @@ public class Main extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     //Fuente para el menu principal Footlight o Goudy Old Style
+    private void mostrarEquipo() {
+        
+    }
 }

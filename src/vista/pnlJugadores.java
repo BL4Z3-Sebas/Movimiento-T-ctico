@@ -71,22 +71,22 @@ public class pnlJugadores extends javax.swing.JPanel {
         }
     }
 
-    public void mostraJugadores(char formacion) {
+    public void mostraJugadores(int formacion) {
         jugadores.clear();
         switch (formacion) {
-            case 'a':
+            case 442:
                 dibujarCirculos(s442);
                 break;
 
-            case 'b':
+            case 4231:
                 dibujarCirculos(s4231);
                 break;
 
-            case 'c':
+            case 352:
                 dibujarCirculos(s352);
                 break;
 
-            case 'd':
+            case 433:
                 dibujarCirculos(s433);
                 break;
 

@@ -30,10 +30,6 @@ public class Jugador {
         this.adyacentes = adyacencia;
     }
 
-    public Jugador(int velocidad, int posesion, int remate) {
-
-    }
-
     public int getVelocidad() {
         return velocidad;
     }
