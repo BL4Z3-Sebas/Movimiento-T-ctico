@@ -60,24 +60,30 @@ public class ManejadorEquipos {
         return null;
     }
 
-    public ArrayList cargarEquipo(String equipo) {
+    public ArrayList<ArrayList> cargarEquipo(String equipo) {
         String[] datos_equipo = equipo.split(";");
         
         String nombre = datos_equipo[0];
         String formacion = datos_equipo[1];
         String[] jugadores = datos_equipo[2].split(" ");
         String[] adyacencia = datos_equipo[3].split(" ");
+        
+        
+//        ArrayList<int[]> matriz_adyacencia = new ArrayList<>();
+//        for (String fila : adyacencia) {
+//            String[] elementos = fila.split(",");
+//            int[] pos = new int[elementos.length];
+//            for (int i = 1; i < elementos.length; i++) {
+//                pos[i - 1] = Integer.parseInt(elementos[i]);
+//            }
+//            matriz_adyacencia.add(pos);
+//        }
 
-        ArrayList<int[]> matriz_adyacencia = new ArrayList<>();
-        for (String fila : adyacencia) {
-            String[] elementos = fila.split(",");
-            int[] pos = new int[elementos.length];
-            for (int i = 1; i < elementos.length; i++) {
-                pos[i - 1] = Integer.parseInt(elementos[i]);
-            }
-            matriz_adyacencia.add(pos);
+        ArrayList<String> matriz_adyacencia2 = new ArrayList<>();
+        for (int i=1; i<adyacencia.length;i++) {
+            
+            matriz_adyacencia2.add(adyacencia[i]);
         }
-
         ArrayList<Jugador> lista_jugadores = new ArrayList<>();
         for (String jugador : jugadores) {
             String[] datos = jugador.split(",");
@@ -92,10 +98,12 @@ public class ManejadorEquipos {
         otros_datos.add(nombre);
         otros_datos.add(formacion);
         
-        ArrayList<List> procesados = new ArrayList<>();
+        ArrayList<ArrayList> procesados = new ArrayList<>();
         procesados.add(otros_datos);
         procesados.add(lista_jugadores);
-        procesados.add(matriz_adyacencia);
+        procesados.add(matriz_adyacencia2);
+     //   procesados.add(matriz_adyacencia);
+        
         return procesados;
     }
 }
