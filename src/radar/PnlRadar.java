@@ -1,23 +1,21 @@
 package radar;
 
 import java.awt.Graphics;
-import radar.Radar;
 
 /**
  *
  * @author Alfonso
  */
-public class Rad extends javax.swing.JPanel {
+public class pnlRadar extends javax.swing.JPanel {
 
     radar.Radar radar;
 
     /**
      * Creates new form Rad
      */
-    public Rad() {
+    public pnlRadar() {
         initComponents();
-        int radio = 80; // Ajusta el tamaño del radio como prefieras
-        radar = new Radar(200, 200, radio);
+        radar = new Radar();
     }
 
     /**
@@ -29,11 +27,13 @@ public class Rad extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setMinimumSize(new java.awt.Dimension(500, 300));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 500, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -47,6 +47,10 @@ public class Rad extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        int radio = (int) (Math.min(getWidth(), getHeight()) * 0.4);
+        moverGrafico(getWidth() / 2, getHeight() / 2, radio);
+
         radar.dibujarRadar(g);
         radar.dibujarGrafico(g);
     }
@@ -54,6 +58,11 @@ public class Rad extends javax.swing.JPanel {
     public void actualizarGrafico(int velocidad, int posesion, int remate) {
         radar.asignarDatosRadar(velocidad, posesion, remate);
         repaint(); // Repinta el panel para mostrar el nuevo gráfico
+    }
+
+    public void moverGrafico(int x, int y, int radio) {
+        radar.setPosicion(x, y, radio);
+//        repaint();
     }
 
 }

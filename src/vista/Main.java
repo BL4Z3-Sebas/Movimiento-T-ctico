@@ -1,6 +1,6 @@
 package vista;
 
-import radar.Rad;
+import radar.pnlRadar;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
 import java.awt.Image;
@@ -15,7 +15,7 @@ public class Main extends javax.swing.JFrame {
     ImageIcon cesped = new ImageIcon("imagenes/cesped_p.jpg");
     ImageIcon lineas = new ImageIcon("imagenes/lineas_blancas.png");
     pnlJugadores cancha;
-    Rad radar;
+    pnlRadar radar;
 
     /**
      * Creates new form Main
@@ -33,11 +33,11 @@ public class Main extends javax.swing.JFrame {
         pnlMenu.setSize(660, 688);
         pnlMenu.setLocation(74, 40);
 
-        radar = new Rad();
+        radar = new pnlRadar();
         radar.setSize(500, 300);
-        radar.setLocation(120, 100);
+        radar.setLocation(154, 240);
         radar.setBackground(new Color(0, 0, 0, 0));
-        radar.actualizarGrafico(70, 80, 95);
+        radar.actualizarGrafico(70, 20, 95);
 
         pnlBG.add(radar);
         pnlBG.add(pnlMenu);
@@ -59,10 +59,11 @@ public class Main extends javax.swing.JFrame {
         lblCancha = new javax.swing.JLabel();
         pnlCesped = new javax.swing.JLabel();
         pnlMenu = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
+        btnAnterior = new javax.swing.JButton();
+        btnSiguiente = new javax.swing.JButton();
+        lblSeleccionar = new javax.swing.JLabel();
+        lblEquipo = new javax.swing.JLabel();
         pnlSombra1 = new javax.swing.JPanel();
         pnlBG = new javax.swing.JPanel();
         lblCerrar = new javax.swing.JLabel();
@@ -95,35 +96,45 @@ public class Main extends javax.swing.JFrame {
         pnlMenu.setPreferredSize(new java.awt.Dimension(680, 688));
         pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Footlight MT Light", 1, 56)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 204, 51));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Movimiento Táctico");
-        pnlMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 80));
+        lblTitulo.setFont(new java.awt.Font("Footlight MT Light", 1, 56)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(255, 204, 51));
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setText("Movimiento Táctico");
+        pnlMenu.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 80));
 
-        jButton1.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 204));
-        jButton1.setText("Formacion A");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAnterior.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
+        btnAnterior.setForeground(new java.awt.Color(255, 255, 255));
+        btnAnterior.setText("< Anterior");
+        btnAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAnteriorActionPerformed(evt);
             }
         });
-        pnlMenu.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 570, 140, 30));
+        pnlMenu.add(btnAnterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 140, 40));
 
-        jButton2.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 204));
-        jButton2.setText("Formacion B");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSiguiente.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
+        btnSiguiente.setForeground(new java.awt.Color(255, 255, 255));
+        btnSiguiente.setText("Siguiente >");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSiguienteActionPerformed(evt);
             }
         });
-        pnlMenu.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 570, 140, 30));
+        pnlMenu.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 140, 40));
 
-        jLabel2.setFont(new java.awt.Font("Footlight MT Light", 0, 24)); // NOI18N
-        jLabel2.setText("Seleccionar equipo");
-        pnlMenu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 260, 40));
+        lblSeleccionar.setBackground(new java.awt.Color(255, 255, 255));
+        lblSeleccionar.setFont(new java.awt.Font("Footlight MT Light", 0, 24)); // NOI18N
+        lblSeleccionar.setForeground(new java.awt.Color(255, 255, 255));
+        lblSeleccionar.setText("Seleccionar equipo:");
+        pnlMenu.add(lblSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 260, 40));
+
+        lblEquipo.setBackground(new Color(255, 225, 255, 50));
+        lblEquipo.setFont(new java.awt.Font("Footlight MT Light", 0, 28)); // NOI18N
+        lblEquipo.setForeground(new java.awt.Color(255, 255, 255));
+        lblEquipo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEquipo.setText("Equipo 1");
+        lblEquipo.setOpaque(true);
+        pnlMenu.add(lblEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 260, 40));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -180,13 +191,13 @@ public class Main extends javax.swing.JFrame {
         lblCerrar.setOpaque(true);
         lblCerrar.setBackground(new Color(204, 0, 0));
         lblCerrar.setForeground(new Color(255, 255, 255));
-        repaint();
+        lblCerrar.repaint();
     }//GEN-LAST:event_lblCerrarMouseEntered
 
     private void lblCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseExited
         // TODO add your handling code here:
         lblCerrar.setOpaque(false);
-        repaint();
+        lblCerrar.repaint();
     }//GEN-LAST:event_lblCerrarMouseExited
 
     private void lblCerrarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseReleased
@@ -196,19 +207,19 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lblCerrarMouseReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
         cancha.mostraJugadores('a');
         revalidate();
         repaint();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
         // TODO add your handling code here:
         cancha.mostraJugadores('b');
         revalidate();
         repaint();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnAnteriorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,12 +234,13 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton btnAnterior;
+    private javax.swing.JButton btnSiguiente;
     private javax.swing.JLabel lblCancha;
     private javax.swing.JLabel lblCerrar;
+    private javax.swing.JLabel lblEquipo;
+    private javax.swing.JLabel lblSeleccionar;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pnlBG;
     private javax.swing.JPanel pnlCampo;
     private javax.swing.JLabel pnlCesped;

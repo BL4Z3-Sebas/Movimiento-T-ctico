@@ -1,11 +1,11 @@
 import java.awt.Color;
 import javax.swing.JFrame;
-import radar.Rad;
+import radar.pnlRadar;
 
 public class TestRadar {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Radar");
-        Rad radarPanel = new Rad();
+        pnlRadar radarPanel = new pnlRadar();
         frame.add(radarPanel);
         frame.setSize(500, 500);  // Tamaño del JFrame
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

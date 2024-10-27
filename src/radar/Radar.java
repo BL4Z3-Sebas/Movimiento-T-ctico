@@ -2,6 +2,8 @@ package radar;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
@@ -21,22 +23,70 @@ public class Radar {
     private int y;
     private int radio;
 
+    private final String[] etiquetas = {"Velocidad", "Agilidad", "Posesión", "Defensa", "Remate", "Ataque"};
+
+    public Radar() {
+    }
+
     public Radar(int x, int y, int radio) {
         this.x = x;
         this.y = y;
         this.radio = radio;
     }
 
-    public void asignarDatosRadar(double velocidad, double posesion, double remate) {
-        // Guardamos los valores entre 0 y 1 para usarlos en el gráfico
+    public Radar(int x, int y, int radio, double velocidad, double posesion, double remate) {
+        setPosicion(x, y, radio);
+        asignarDatosRadar(velocidad, posesion, remate);
+
+    }
+
+    public final void setPosicion(int x, int y, int radio) {
+        this.x = x;
+        this.y = y;
+        this.radio = radio;
+    }
+
+    public final void asignarDatosRadar(double velocidad, double posesion, double remate) {
         this.velocidad = velocidad * 0.01;
         this.posesion = posesion * 0.01;
         this.remate = remate * 0.01;
 
-        // Calculamos los valores de ataque, agilidad y defensa
         this.ataque = remate * 0.006 + velocidad * 0.003 + posesion * 0.001;
         this.agilidad = velocidad * 0.006 + posesion * 0.003 + remate * 0.001;
         this.defensa = posesion * 0.006 + remate * 0.003 + velocidad * 0.001;
+    }
+
+    private void dibujarEtiquetas(Graphics2D g2) {
+        g2.setFont(new Font("Footlight MT Light", Font.PLAIN, (int) (0.2 * radio)));
+        FontMetrics metrics = g2.getFontMetrics();
+
+        int[] angulos = {90, 150, 210, 270, 330, 30};
+        for (int i = 0; i < etiquetas.length; i++) {
+            double angulo = Math.toRadians(angulos[i]);
+
+            // Calculamos la posición inicial de la etiqueta
+            int etiquetaX = (int) (x + (radio + 10) * Math.cos(angulo));
+            int etiquetaY = (int) (y - (radio + 10) * Math.sin(angulo));
+
+            // Obtenemos el ancho de la etiqueta para ajustar la posición horizontal
+            int anchoEtiqueta = metrics.stringWidth(etiquetas[i]);
+
+            // Ajustamos la posición para centrar la etiqueta horizontalmente
+            if (angulo == Math.toRadians(90) || angulo == Math.toRadians(270)) {
+                etiquetaX -= anchoEtiqueta / 2;
+            } else if (angulo < Math.toRadians(270) && angulo > Math.toRadians(90)) {
+                etiquetaX -= anchoEtiqueta;
+            }
+
+            // Ajuste de la posición vertical
+            if (angulo > Math.toRadians(180)) {
+                etiquetaY += metrics.getHeight() / 2;
+            }
+
+            // Dibujamos la etiqueta
+            g2.setColor(Color.white);
+            g2.drawString(etiquetas[i], etiquetaX, etiquetaY);
+        }
     }
 
     public void dibujarRadar(Graphics g) {
@@ -44,18 +94,21 @@ public class Radar {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         // Dibujamos hexágonos concéntricos
+        int delta = 10;
         Polygon hexagono = crearPoligono(6, radio);
-        g2.setColor(Color.orange);
+        g2.setStroke(new BasicStroke(2));
+        g2.setColor(new Color(255, 195, 0));
         g2.draw(hexagono);
 
         for (double factor = 0.8; factor > 0; factor -= 0.2) {
             Polygon hexagonoInterior = crearPoligono(6, radio * factor);
-            g2.setColor(Color.yellow);
+            g2.setColor(new Color(255, 195 + delta, delta));
             g2.draw(hexagonoInterior);
+            delta += 10;
+            System.out.println(delta);
         }
 
-        g2.setColor(Color.white);
-        g2.drawString("Velocidad", x - 10, y - radio - 20);
+        dibujarEtiquetas(g2);
     }
 
     private Polygon crearPoligono(int numeroLados, double radio) {
