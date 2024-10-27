@@ -56,6 +56,10 @@ public class Radar {
         this.defensa = posesion * 0.006 + remate * 0.003 + velocidad * 0.001;
     }
 
+    public final void asignarDatosRadar(double[] promedio) {
+        asignarDatosRadar(promedio[0], promedio[1], promedio[2]);
+    }
+
     private void dibujarEtiquetas(Graphics2D g2) {
         g2.setFont(new Font("Footlight MT Light", Font.PLAIN, (int) (0.2 * radio)));
         FontMetrics metrics = g2.getFontMetrics();
@@ -105,7 +109,6 @@ public class Radar {
             g2.setColor(new Color(255, 195 + delta, delta));
             g2.draw(hexagonoInterior);
             delta += 10;
-            System.out.println(delta);
         }
 
         dibujarEtiquetas(g2);

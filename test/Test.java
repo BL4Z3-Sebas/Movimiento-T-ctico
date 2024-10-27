@@ -1,7 +1,5 @@
 
 import java.util.ArrayList;
-import modelo.Campo;
-import modelo.Jugador;
 import modelo.ManejadorEquipos;
 
 public class Test {
@@ -9,8 +7,10 @@ public class Test {
     public static void main(String[] args) {
         ManejadorEquipos manejo = new ManejadorEquipos();
 
-        String equipo = manejo.equipoAnterior("Equipo1");
+        String equipo;
+        equipo = (String) manejo.leerEquipoAnterior("Equipo1").get(0).get(0);
         System.out.println(equipo);
+        ArrayList a = manejo.leerEquipo("Equipo1");
 //        ArrayList lista = manejo.cargarEquipo(equipo);
 //        Campo campo = new Campo();
 //        ArrayList<String> listavect = (ArrayList<String>) lista.get(2);
