@@ -1,10 +1,12 @@
-package vista;
+package recursos;
 
 import radar.pnlRadar;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import modelo.Campo;
+import modelo.ManejadorCampo;
 
 /**
  *
@@ -16,12 +18,15 @@ public class Main extends javax.swing.JFrame {
     ImageIcon lineas = new ImageIcon("imagenes/lineas_blancas.png");
     pnlJugadores cancha;
     pnlRadar radar;
+    Campo campo;
+    ManejadorCampo mc = new ManejadorCampo();
 
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
+        campo = mc.crearCampo(null, 1);
         cancha = new pnlJugadores();
         cancha.setSize(516, 688);
         cancha.setLocation(776, 40);
@@ -37,7 +42,7 @@ public class Main extends javax.swing.JFrame {
         radar.setSize(500, 300);
         radar.setLocation(154, 280);
         radar.setBackground(new Color(0, 0, 0, 0));
-        radar.actualizarGrafico(70, 20, 95);
+        radar.actualizarGrafico(campo.getPromedio());
 
         pnlBG.add(radar);
         pnlBG.add(pnlMenu);
@@ -215,14 +220,20 @@ public class Main extends javax.swing.JFrame {
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         // TODO add your handling code here:
-        cancha.mostraJugadores(442);
+        campo = mc.crearCampo(campo.getNombre(), ManejadorCampo.SIGUIENTE);
+        cancha.mostraJugadores(campo.getFormacion());
+        radar.actualizarGrafico(campo.getPromedio());
+        lblEquipo.setText(campo.getNombre());
 //        cancha.revalidate();
         repaint();
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
         // TODO add your handling code here:
-        cancha.mostraJugadores(4231);
+        campo = mc.crearCampo(campo.getNombre(), ManejadorCampo.ANTERIOR);
+        cancha.mostraJugadores(campo.getFormacion());
+        radar.actualizarGrafico(campo.getPromedio());
+        lblEquipo.setText(campo.getNombre());
 //        cancha.revalidate();
         repaint();
     }//GEN-LAST:event_btnAnteriorActionPerformed
@@ -257,7 +268,4 @@ public class Main extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     //Fuente para el menu principal Footlight o Goudy Old Style
-    private void mostrarEquipo() {
-        
-    }
 }

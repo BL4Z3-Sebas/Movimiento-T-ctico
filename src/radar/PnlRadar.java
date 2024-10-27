@@ -59,6 +59,11 @@ public class pnlRadar extends javax.swing.JPanel {
         radar.asignarDatosRadar(velocidad, posesion, remate);
         repaint(); // Repinta el panel para mostrar el nuevo gráfico
     }
+    
+    public void actualizarGrafico(double[] promedio) {
+        radar.asignarDatosRadar(promedio);
+        repaint(); // Repinta el panel para mostrar el nuevo gráfico
+    }
 
     public void moverGrafico(int x, int y, int radio) {
         radar.setPosicion(x, y, radio);

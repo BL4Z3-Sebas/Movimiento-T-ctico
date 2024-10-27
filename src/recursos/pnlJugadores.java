@@ -1,4 +1,4 @@
-package vista;
+package recursos;
 
 import java.awt.Color;
 import java.awt.Graphics;

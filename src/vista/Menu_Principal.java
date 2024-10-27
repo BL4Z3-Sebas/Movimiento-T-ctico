@@ -5,6 +5,7 @@
 package vista;
 
 
+import recursos.Main;
 import static java.awt.Color.BLUE;
 import static java.awt.Color.WHITE;
 import java.awt.Image;

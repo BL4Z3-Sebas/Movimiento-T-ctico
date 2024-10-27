@@ -10,22 +10,22 @@ import java.util.PriorityQueue;
  */
 public class Campo {
 
-    ArrayList<Jugador> Jugadores;
-    public static int[][] matrizAdyacencia;
+    private String nombre;
+    private int formacion;
+    private ArrayList<Jugador> jugadores;
+    private int[][] matrizAdyacencia;
 
     public Campo() {
-        this.Jugadores = new ArrayList<>();
+        this.jugadores = new ArrayList<>();
 //        matrizAdyacencia = new int[11][11];
     }
 
-    // Método para agregar un jugador a la lista
     public void addJugador(Jugador jugador) {
-        Jugadores.add(jugador);
+        jugadores.add(jugador);
     }
 
-    // Método para obtener un jugador por su nombre de manera iterativa
     public Jugador getJugador(String nombre) {
-        for (Jugador jugador : Jugadores) {
+        for (Jugador jugador : jugadores) {
             if (jugador.getNombre().equals(nombre)) {
                 return jugador;
             }
@@ -33,8 +33,50 @@ public class Campo {
         return null;  // Retorna null si no se encuentra el jugador
     }
 
-    // Método para realizar el recorrido basado en velocidad
-    // Método para realizar el recorrido hacia varios posibles jugadores finales basado en velocidad
+    public void setListaJugadores(ArrayList lista_jugadores) {
+        this.jugadores = lista_jugadores;
+    }
+
+    public void setMatrizAdyacencia(int[][] matriz_adyacencia) {
+        this.matrizAdyacencia = matriz_adyacencia;
+    }
+
+    public int[][] getMatrizAdyacencia() {
+        return matrizAdyacencia;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getFormacion() {
+        return formacion;
+    }
+
+    public void setFormacion(int formacion) {
+        this.formacion = formacion;
+    }
+
+    public double[] getPromedio() {
+        double[] promedio = new double[11];
+        for (int i = 0; i < 11; i++) {
+            Jugador j = jugadores.get(i);
+            promedio[0] += j.getVelocidad();
+            promedio[1] += j.getPosesion();
+            promedio[2] += j.getRemate();
+        }
+        promedio[0] = promedio[0] / 11;
+        promedio[1] = promedio[1] / 11;
+        promedio[2] = promedio[2] / 11;
+
+        return promedio;
+    }
+
+    //========================================================================//
     public ArrayList<Jugador> recorridoVelocidad(String nombre1, ArrayList<String> nombresFinales) {
         Jugador jugadorInicial = getJugador(nombre1);
         ArrayList<Jugador> jugadoresFinales = new ArrayList<>();
@@ -57,16 +99,15 @@ public class Campo {
         return caminoOptimo;
     }
 
-// Método para encontrar el mejor camino óptimo hacia múltiples jugadores finales
     private ArrayList<Jugador> encontrarMejorCaminoOptimo(Jugador jugadorInicial, ArrayList<Jugador> jugadoresFinales, String criterio) {
-        int numJugadores = Jugadores.size();
+        int numJugadores = jugadores.size();
         boolean[] visitado = new boolean[numJugadores];
         int[] distancias = new int[numJugadores];
         int[] predecesores = new int[numJugadores]; // Para reconstruir el camino
 
         Arrays.fill(distancias, Integer.MAX_VALUE);
         Arrays.fill(predecesores, -1);
-        int indiceInicial = Jugadores.indexOf(jugadorInicial);
+        int indiceInicial = jugadores.indexOf(jugadorInicial);
         distancias[indiceInicial] = 0;
 
         PriorityQueue<Integer> colaPrioridad = new PriorityQueue<>((a, b) -> Integer.compare(distancias[a], distancias[b]));
@@ -84,13 +125,13 @@ public class Campo {
                     int peso = 0;
                     switch (criterio) {
                         case "velocidad":
-                            peso = Jugadores.get(i).getVelocidad();
+                            peso = jugadores.get(i).getVelocidad();
                             break;
                         case "posesión":
-                            peso = Jugadores.get(i).getPosesion();
+                            peso = jugadores.get(i).getPosesion();
                             break;
                         case "remate":
-                            peso = Jugadores.get(i).getRemate();
+                            peso = jugadores.get(i).getRemate();
                             break;
                         default:
                             break;
@@ -111,9 +152,9 @@ public class Campo {
         int mejorDistancia = Integer.MAX_VALUE;
         for (Jugador jugadorFinal : jugadoresFinales) {
             ArrayList<Jugador> caminoActual = new ArrayList<>();
-            int indiceFinal = Jugadores.indexOf(jugadorFinal);
+            int indiceFinal = jugadores.indexOf(jugadorFinal);
             for (int at = indiceFinal; at != -1; at = predecesores[at]) {
-                caminoActual.add(0, Jugadores.get(at)); // Agregar al principio
+                caminoActual.add(0, jugadores.get(at)); // Agregar al principio
             }
 
             // Verificar si se encontró un camino y comparar distancias
@@ -129,51 +170,15 @@ public class Campo {
         return mejorCamino;
     }
 
-//    public void recorridoVelocidad(String nombre1, String nombre2) {
-//        Camino camino = new Camino();
-//        Jugador jugadori = this.getJugador(nombre1);
-//        Jugador jugadorf = this.getJugador(nombre2);
-//        recorridoVelocidadRecursivo(nombre1, nombre2, camino, 0);
-//
-//    }
-    public static int[][] generarMatrizAdyacencia(ArrayList<String> equipos) {
-        int[][] matriz = new int[11][11];
-        for (String equipo : equipos) {
-            String[] marcas = equipo.split(",");
-
-            for (int i = 1; i < equipos.size(); i++) {
-                matriz[equipos.indexOf(equipo)][i - 1] = Integer.parseInt(marcas[i]);
-            }
-        }
-        return matriz;
-    }
-
-    public void creacionFormacion(ArrayList<Jugador> jugadores, int[][] matriz) {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                if (matriz[i][j] == 1) {
-                    jugadores.get(i).addJugador(jugadores.get(j));
-                }
-            }
-        }
-
-    }
-
     public void imprimirMatriz(int[][] matriz) {
-        for (int i = 0; i < matriz.length; i++) {
+        for (int[] matriz1 : matriz) {
             for (int j = 0; j < matriz.length; j++) {
-                System.out.print(matriz[i][j] + " ");
+                System.out.print(matriz1[j] + " ");
             }
             System.out.print("\n");
         }
-
     }
-//
-//    public void recorridoVelocidadRecursivo(String nombre1, String nombre2, Camino camino, int i) {
-//
-//    }
 
-// Método para realizar el recorrido hacia varios posibles jugadores finales basado en remate
     public ArrayList<Jugador> recorridoRemate(String nombre1, ArrayList<String> nombresFinales) {
         Jugador jugadorInicial = getJugador(nombre1);
         ArrayList<Jugador> jugadoresFinales = new ArrayList<>();

@@ -10,21 +10,22 @@ import java.util.ArrayList;
  */
 public class ManejadorEquipos {
 
-    public static String equipoSiguiente(String equipoActual) {
+    public ArrayList<ArrayList> leerEquipoSiguiente(String equipoActual) {
         try (BufferedReader br = new BufferedReader(new FileReader("archivos/equipos.csv"))) {
+            String linea;
 
             if (equipoActual == null) {
-                return br.readLine();
+                linea = br.readLine();
+                return cargarEquipo(linea);
             }
 
-            String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(";");
                 if (datos[0].equals(equipoActual)) {
                     if ((linea = br.readLine()) == null) {
-                        return equipoSiguiente(null);
+                        return leerEquipoSiguiente(null);
                     }
-                    return linea;
+                    return cargarEquipo(linea);
                 }
             }
         } catch (Exception e) {
@@ -33,15 +34,37 @@ public class ManejadorEquipos {
         return null;
     }
 
-    public static String equipoAnterior(String equipoActual) {
+    public ArrayList<ArrayList> leerEquipo(String equipo) {
         try (BufferedReader br = new BufferedReader(new FileReader("archivos/equipos.csv"))) {
-
             String linea;
+
+            if (equipo == null) {
+                return cargarEquipo(br.readLine());
+            }
+
+            while ((linea = br.readLine()) != null) {
+                String[] datos = linea.split(";");
+                if (datos[0].equals(equipo)) {
+                    return cargarEquipo(linea);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+
+    }
+
+    public ArrayList<ArrayList> leerEquipoAnterior(String equipoActual) {
+        try (BufferedReader br = new BufferedReader(new FileReader("archivos/equipos.csv"))) {
+            String linea;
+
             while ((linea = br.readLine()) != null) {
                 String datos[] = linea.split(";");
-                String siguiente = equipoSiguiente(datos[0]).split(";")[0];
+
+                String siguiente = (String) leerEquipoSiguiente(datos[0]).get(0).get(0);
                 if (siguiente.equals(equipoActual)) {
-                    return linea;
+                    return cargarEquipo(linea);
                 }
             }
         } catch (Exception e) {
@@ -50,7 +73,28 @@ public class ManejadorEquipos {
         return null;
     }
 
-    public ArrayList<ArrayList> cargarEquipo(String equipo) {
+    private ArrayList procesarListaAdyacencia(String[] adyacencia) {
+        ArrayList<String> lista_adyacencia = new ArrayList<>();
+        for (int i = 0; i < 11; i++) {
+            lista_adyacencia.add(adyacencia[i]);
+        }
+        return lista_adyacencia;
+    }
+
+    private ArrayList procesarJugadores(String[] jugadores) {
+        ArrayList<Jugador> lista_jugadores = new ArrayList<>();
+        for (String jugador : jugadores) {
+            String[] datos = jugador.split(",");
+            Jugador j = new Jugador(datos[0],
+                    Integer.parseInt(datos[1]),
+                    Integer.parseInt(datos[2]),
+                    Integer.parseInt(datos[3]));
+            lista_jugadores.add(j);
+        }
+        return lista_jugadores;
+    }
+
+    private ArrayList<ArrayList> cargarEquipo(String equipo) {
         String[] datos_equipo = equipo.split(";");
 
         String nombre = datos_equipo[0];
@@ -71,30 +115,5 @@ public class ManejadorEquipos {
         procesados.add(listas_adyacencia);
 
         return procesados;
-    }
-
-    private ArrayList procesarListaAdyacencia(String[] adyacencia) {
-        ArrayList<String> lista_adyacencia = new ArrayList<>();
-        for (int i = 1; i < adyacencia.length; i++) {
-            lista_adyacencia.add(adyacencia[i]);
-        }
-        return lista_adyacencia;
-    }
-
-    private ArrayList procesarJugadores(String[] jugadores) {
-        ArrayList<Jugador> lista_jugadores = new ArrayList<>();
-        for (String jugador : jugadores) {
-            String[] datos = jugador.split(",");
-            Jugador j = new Jugador(datos[0],
-                    Integer.parseInt(datos[1]),
-                    Integer.parseInt(datos[2]),
-                    Integer.parseInt(datos[3]));
-            lista_jugadores.add(j);
-        }
-        return lista_jugadores;
-    }
-
-    private void asignarAdyacentes(ArrayList listas_adyacencia, ArrayList jugadores) {
-        
     }
 }
