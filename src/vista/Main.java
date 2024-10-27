@@ -1,11 +1,10 @@
 package vista;
 
-import radar.DiagramaRadar;
+import radar.Rad;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
-import radar.DiagramaRadar2;
 
 /**
  *
@@ -16,9 +15,7 @@ public class Main extends javax.swing.JFrame {
     ImageIcon cesped = new ImageIcon("imagenes/cesped_p.jpg");
     ImageIcon lineas = new ImageIcon("imagenes/lineas_blancas.png");
     pnlJugadores cancha;
-    DiagramaRadar2 radar2;
-    DiagramaRadar radar;
-    Rad radar3;
+    Rad radar;
 
     /**
      * Creates new form Main
@@ -36,30 +33,16 @@ public class Main extends javax.swing.JFrame {
         pnlMenu.setSize(660, 688);
         pnlMenu.setLocation(74, 40);
 
-        radar2 = new DiagramaRadar2(80, 40, 90);
-        radar2.setSize(500, 300);
-        radar2.setLocation(120, 100);
-        radar2.setOpaque(true);
-        radar2.setBackground(new Color(0, 0, 0, 10));
-
-        radar = new DiagramaRadar();
+        radar = new Rad();
         radar.setSize(500, 300);
-        radar.setLocation(120, 200);
+        radar.setLocation(120, 100);
         radar.setBackground(new Color(0, 0, 0, 0));
-        radar.repaint();
+        radar.actualizarGrafico(70, 80, 95);
 
-        radar3 = new Rad();
-        radar3.setSize(500, 300);
-        radar3.setLocation(120, 100);
-        radar3.setBackground(new Color(0, 0, 0, 0));
-        radar3.actualizarGrafico(70, 80, 95);
-        
-        pnlBG.add(radar3);
+        pnlBG.add(radar);
         pnlBG.add(pnlMenu);
         pnlBG.add(cancha);
         pnlBG.add(pnlCampo);
-//        pnlBG.add(radar2);
-//        pnlBG.add(radar);
     }
 
     /**

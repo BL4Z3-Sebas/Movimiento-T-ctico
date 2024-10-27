@@ -1,6 +1,6 @@
 import java.awt.Color;
 import javax.swing.JFrame;
-import vista.Rad;
+import radar.Rad;
 
 public class TestRadar {
     public static void main(String[] args) {

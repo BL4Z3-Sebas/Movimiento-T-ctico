@@ -4,25 +4,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 
+/**
+ *
+ * @author andre
+ */
 public class Campo {
 
-    private ArrayList<Jugador> jugadores;
-    private int[][] matrizAdyacencia;
+    ArrayList<Jugador> Jugadores;
+    public static int[][] matrizAdyacencia;
 
-    // Constructor que inicializa la lista de jugadores y la matriz de adyacencia
-    public Campo(ArrayList<Jugador> jugadores, int[][] matrizAdyacencia) {
-        this.jugadores = jugadores;
-        this.matrizAdyacencia = matrizAdyacencia;
+    public Campo() {
+        this.Jugadores = new ArrayList<>();
+        matrizAdyacencia = new int[11][11];
     }
 
     // Método para agregar un jugador a la lista
     public void addJugador(Jugador jugador) {
-        jugadores.add(jugador);
+        Jugadores.add(jugador);
     }
 
     // Método para obtener un jugador por su nombre de manera iterativa
     public Jugador getJugador(String nombre) {
-        for (Jugador jugador : jugadores) {
+        for (Jugador jugador : Jugadores) {
             if (jugador.getNombre().equals(nombre)) {
                 return jugador;
             }
@@ -56,14 +59,14 @@ public class Campo {
 
 // Método para encontrar el mejor camino óptimo hacia múltiples jugadores finales
     private ArrayList<Jugador> encontrarMejorCaminoOptimo(Jugador jugadorInicial, ArrayList<Jugador> jugadoresFinales, String criterio) {
-        int numJugadores = jugadores.size();
+        int numJugadores = Jugadores.size();
         boolean[] visitado = new boolean[numJugadores];
         int[] distancias = new int[numJugadores];
         int[] predecesores = new int[numJugadores]; // Para reconstruir el camino
 
         Arrays.fill(distancias, Integer.MAX_VALUE);
         Arrays.fill(predecesores, -1);
-        int indiceInicial = jugadores.indexOf(jugadorInicial);
+        int indiceInicial = Jugadores.indexOf(jugadorInicial);
         distancias[indiceInicial] = 0;
 
         PriorityQueue<Integer> colaPrioridad = new PriorityQueue<>((a, b) -> Integer.compare(distancias[a], distancias[b]));
@@ -80,11 +83,11 @@ public class Campo {
                 if (matrizAdyacencia[indiceActual][i] == 1 && !visitado[i]) {
                     int peso = 0;
                     if (criterio.equals("velocidad")) {
-                        peso = jugadores.get(i).getVelocidad();
+                        peso = Jugadores.get(i).getVelocidad();
                     } else if (criterio.equals("posesión")) {
-                        peso = jugadores.get(i).getPosesion();
+                        peso = Jugadores.get(i).getPosesion();
                     } else if (criterio.equals("remate")) {
-                        peso = jugadores.get(i).getRemate();
+                        peso = Jugadores.get(i).getRemate();
                     }
                     int nuevaDistancia = distancias[indiceActual] + peso;
 
@@ -102,9 +105,9 @@ public class Campo {
         int mejorDistancia = Integer.MAX_VALUE;
         for (Jugador jugadorFinal : jugadoresFinales) {
             ArrayList<Jugador> caminoActual = new ArrayList<>();
-            int indiceFinal = jugadores.indexOf(jugadorFinal);
+            int indiceFinal = Jugadores.indexOf(jugadorFinal);
             for (int at = indiceFinal; at != -1; at = predecesores[at]) {
-                caminoActual.add(0, jugadores.get(at)); // Agregar al principio
+                caminoActual.add(0, Jugadores.get(at)); // Agregar al principio
             }
 
             // Verificar si se encontró un camino y comparar distancias
@@ -120,28 +123,49 @@ public class Campo {
         return mejorCamino;
     }
 
-// Método para realizar el recorrido hacia varios posibles jugadores finales basado en posesión
-    public ArrayList<Jugador> recorridoPosesion(String nombre1, ArrayList<String> nombresFinales) {
-        Jugador jugadorInicial = getJugador(nombre1);
-        ArrayList<Jugador> jugadoresFinales = new ArrayList<>();
+//    public void recorridoVelocidad(String nombre1, String nombre2) {
+//        Camino camino = new Camino();
+//        Jugador jugadori = this.getJugador(nombre1);
+//        Jugador jugadorf = this.getJugador(nombre2);
+//        recorridoVelocidadRecursivo(nombre1, nombre2, camino, 0);
+//
+//    }
+    public static int[][] generarMatrizAdyasencia(ArrayList<String> equipos) {
+        int[][] matriz = new int[11][11];
+        for (String equipo : equipos) {
+            String[] marcas = equipo.split(",");
 
-        for (String nombreFinal : nombresFinales) {
-            Jugador jugadorFinal = getJugador(nombreFinal);
-            if (jugadorFinal != null) {
-                jugadoresFinales.add(jugadorFinal);
+            for (int i = 1; i < equipos.size(); i++) {
+                matriz[equipos.indexOf(equipo)][i - 1] = Integer.parseInt(marcas[i]);
+            }
+        }
+        return matriz;
+    }
+
+    public void creacionFormacion(ArrayList<Jugador> jugadores, int[][] matriz) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (matriz[i][j] == 1) {
+                    jugadores.get(i).addJugador(jugadores.get(j));
+                }
             }
         }
 
-        if (jugadorInicial == null || jugadoresFinales.isEmpty()) {
-            System.out.println("Jugador no encontrado.");
-            return null;
+    }
+
+    public void imprimirMatriz(int[][] matriz) {
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz.length; j++) {
+                System.out.print(matriz[i][j] + " ");
+            }
+            System.out.print("\n");
         }
 
-        ArrayList<Jugador> caminoOptimo = encontrarMejorCaminoOptimo(jugadorInicial, jugadoresFinales, "posesión");
-
-        // Devolver el camino (o realizar otras acciones)
-        return caminoOptimo;
     }
+//
+//    public void recorridoVelocidadRecursivo(String nombre1, String nombre2, Camino camino, int i) {
+//
+//    }
 
 // Método para realizar el recorrido hacia varios posibles jugadores finales basado en remate
     public ArrayList<Jugador> recorridoRemate(String nombre1, ArrayList<String> nombresFinales) {

@@ -1,4 +1,4 @@
-package vista;
+package radar;
 
 import java.awt.Graphics;
 import radar.Radar;
