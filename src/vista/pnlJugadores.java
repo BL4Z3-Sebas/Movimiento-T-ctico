@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.util.ArrayList;
 import modelo.Circulo;
 import modelo.Formaciones;
@@ -40,22 +41,8 @@ public class pnlJugadores extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                formMouseClicked(evt);
-            }
-        });
         setLayout(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        // TODO add your handling code here:
-        jugadores.add(new Circulo(evt.getX(), evt.getY(), 20, Color.BLUE));
-        System.out.println(evt.getX() + ", " + evt.getY());
-        revalidate();
-        repaint();
-        this.getParent().repaint();
-    }//GEN-LAST:event_formMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -101,6 +88,8 @@ public class pnlJugadores extends javax.swing.JPanel {
 
     public void dibujarEquipo(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
         g2.setStroke(new BasicStroke(2));
         for (int i = 0; i < 11; i++) {
             Circulo c1 = jugadores.get(i);

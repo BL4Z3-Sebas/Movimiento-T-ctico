@@ -4,7 +4,9 @@ import radar.pnlRadar;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
 import java.awt.Image;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
+import javax.swing.JToggleButton;
 import modelo.Campo;
 import modelo.ManejadorCampo;
 
@@ -20,6 +22,7 @@ public class Main extends javax.swing.JFrame {
     pnlRadar radar;
     Campo campo;
     ManejadorCampo mc = new ManejadorCampo();
+    ButtonGroup bg = new ButtonGroup();
 
     /**
      * Creates new form Main
@@ -39,9 +42,14 @@ public class Main extends javax.swing.JFrame {
         pnlMenu.setLocation(74, 40);
 
         radar = new pnlRadar();
-        radar.setSize(500, 300);
-        radar.setLocation(154, 280);
+        radar.setSize(500, 280);
+        radar.setLocation(154, 260);
         radar.setBackground(new Color(0, 0, 0, 0));
+
+        bg.add(tbtn352);
+        bg.add(tbtn4231);
+        bg.add(tbtn433);
+        bg.add(tbtn442);
 
         pnlBG.add(radar);
         pnlBG.add(pnlMenu);
@@ -69,7 +77,11 @@ public class Main extends javax.swing.JFrame {
         btnAnterior = new javax.swing.JButton();
         lblSeleccionar = new javax.swing.JLabel();
         lblEquipo = new javax.swing.JLabel();
-        pnlSombra1 = new javax.swing.JPanel();
+        tbtn4231 = new javax.swing.JToggleButton();
+        tbtn433 = new javax.swing.JToggleButton();
+        tbtn352 = new javax.swing.JToggleButton();
+        tbtn442 = new javax.swing.JToggleButton();
+        jLabel1 = new javax.swing.JLabel();
         pnlBG = new javax.swing.JPanel();
         lblCerrar = new javax.swing.JLabel();
 
@@ -114,7 +126,7 @@ public class Main extends javax.swing.JFrame {
 
         btnSiguiente.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
         btnSiguiente.setForeground(new java.awt.Color(255, 255, 255));
-        btnSiguiente.setText("Siguiente >");
+        btnSiguiente.setText("Siguiente");
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSiguienteActionPerformed(evt);
@@ -124,7 +136,7 @@ public class Main extends javax.swing.JFrame {
 
         btnAnterior.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
         btnAnterior.setForeground(new java.awt.Color(255, 255, 255));
-        btnAnterior.setText("< Anterior");
+        btnAnterior.setText("Anterior");
         btnAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnteriorActionPerformed(evt);
@@ -145,15 +157,55 @@ public class Main extends javax.swing.JFrame {
         lblEquipo.setOpaque(true);
         pnlMenu.add(lblEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 260, 40));
 
+        tbtn4231.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
+        tbtn4231.setForeground(new java.awt.Color(255, 255, 255));
+        tbtn4231.setText("4-2-3-1");
+        tbtn4231.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbtn4231ActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(tbtn4231, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 540, 100, 40));
+
+        tbtn433.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
+        tbtn433.setForeground(new java.awt.Color(255, 255, 255));
+        tbtn433.setText("4-3-3");
+        tbtn433.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbtn433ActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(tbtn433, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 540, 100, 40));
+
+        tbtn352.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
+        tbtn352.setForeground(new java.awt.Color(255, 255, 255));
+        tbtn352.setText("3-5-2");
+        tbtn352.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbtn352ActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(tbtn352, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 540, 100, 40));
+
+        tbtn442.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
+        tbtn442.setForeground(new java.awt.Color(255, 255, 255));
+        tbtn442.setText("4-4-2");
+        tbtn442.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbtn442ActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(tbtn442, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 540, 100, 40));
+
+        jLabel1.setFont(new java.awt.Font("Footlight MT Light", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Formacion:");
+        pnlMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 120, 40));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        pnlSombra1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        pnlSombra1.setOpaque(false);
-        pnlSombra1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(pnlSombra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(776, 40, 516, 688));
 
         pnlBG.setLayout(null);
 
@@ -223,6 +275,7 @@ public class Main extends javax.swing.JFrame {
         cancha.mostraJugadores(campo.getFormacion());
         radar.actualizarGrafico(campo.getPromedio());
         lblEquipo.setText(campo.getNombre());
+        bg.clearSelection();
 //        cancha.revalidate();
         repaint();
     }//GEN-LAST:event_btnSiguienteActionPerformed
@@ -234,9 +287,50 @@ public class Main extends javax.swing.JFrame {
         cancha.mostraJugadores(campo.getFormacion());
         radar.actualizarGrafico(campo.getPromedio());
         lblEquipo.setText(campo.getNombre());
+        bg.clearSelection();
 //        cancha.revalidate();
         repaint();
     }//GEN-LAST:event_btnAnteriorActionPerformed
+
+    private void tbtn442ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbtn442ActionPerformed
+        // TODO add your handling code here:
+        if (campo == null) {
+            return;
+        }
+        campo.setFormacion(442);
+        cancha.mostraJugadores(campo.getFormacion());
+        repaint();
+    }//GEN-LAST:event_tbtn442ActionPerformed
+
+    private void tbtn4231ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbtn4231ActionPerformed
+        // TODO add your handling code here:
+        if (campo == null) {
+            return;
+        }
+        campo.setFormacion(4231);
+        cancha.mostraJugadores(campo.getFormacion());
+        repaint();
+    }//GEN-LAST:event_tbtn4231ActionPerformed
+
+    private void tbtn433ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbtn433ActionPerformed
+        // TODO add your handling code here:
+        if (campo == null) {
+            return;
+        }
+        campo.setFormacion(433);
+        cancha.mostraJugadores(campo.getFormacion());
+        repaint();
+    }//GEN-LAST:event_tbtn433ActionPerformed
+
+    private void tbtn352ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbtn352ActionPerformed
+        // TODO add your handling code here:
+        if (campo == null) {
+            return;
+        }
+        campo.setFormacion(352);
+        cancha.mostraJugadores(campo.getFormacion());
+        repaint();
+    }//GEN-LAST:event_tbtn352ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,6 +348,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnSiguiente;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblCancha;
     private javax.swing.JLabel lblCerrar;
     private javax.swing.JLabel lblEquipo;
@@ -264,7 +359,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel pnlCesped;
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlSombra;
-    private javax.swing.JPanel pnlSombra1;
+    private javax.swing.JToggleButton tbtn352;
+    private javax.swing.JToggleButton tbtn4231;
+    private javax.swing.JToggleButton tbtn433;
+    private javax.swing.JToggleButton tbtn442;
     // End of variables declaration//GEN-END:variables
 
     //Fuente para el menu principal Footlight o Goudy Old Style
