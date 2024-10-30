@@ -4,7 +4,6 @@
  */
 package vista;
 
-
 import static java.awt.Color.BLUE;
 import static java.awt.Color.WHITE;
 import java.awt.Image;
@@ -14,6 +13,10 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.util.List;
+import javax.swing.SwingWorker;
+import javax.swing.Timer;
 
 /**
  *
@@ -21,33 +24,78 @@ import javax.swing.ImageIcon;
  */
 public class Menu_Principal extends javax.swing.JPanel {
 
+    private Timer colorChangeTimer;
+    private Color[] colors = {Color.RED, Color.GREEN, Color.BLUE, Color.ORANGE, Color.MAGENTA}; // Colores a usar
+    private int currentColorIndex = 0; // Índice del color actual
+
     /**
      * Creates new form Menu_Principal
      */
     public Menu_Principal() {
         initComponents();
-        
-         estadioImage.addComponentListener(new ComponentAdapter() {
+        colorChangeTimer = new Timer(3000, e -> cambiarColorTexto());
+        colorChangeTimer.start(); // Inicia el temporizador
+        estadioImage.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 ajustarImagen();
             }
         });
-         
+
     }
-     private void ajustarImagen() {
+
+    private void transitarColor(Color startColor, Color endColor, int steps) {
+        SwingWorker<Void, Color> worker = new SwingWorker<Void, Color>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                for (int i = 0; i <= steps; i++) {
+                    int red = (int) (startColor.getRed() + (endColor.getRed() - startColor.getRed()) * (i / (float) steps));
+                    int green = (int) (startColor.getGreen() + (endColor.getGreen() - startColor.getGreen()) * (i / (float) steps));
+                    int blue = (int) (startColor.getBlue() + (endColor.getBlue() - startColor.getBlue()) * (i / (float) steps));
+                    publish(new Color(red, green, blue)); // Publica el color intermedio
+                    try {
+                        Thread.sleep(20); // Espera 20 ms para suavizar la transición
+                    } catch (InterruptedException e) {
+                        break;
+                    }
+                }
+                return null;
+            }
+
+            @Override
+            protected void process(List<Color> colors) {
+                // Cambia el color del texto en el JLabel
+                for (Color color : colors) {
+                    jLabel1.setForeground(color);
+                }
+            }
+        };
+        worker.execute(); // Inicia el worker
+    }
+
+    private void cambiarColorTexto() {
+        Color startColor = jLabel1.getForeground();
+        Color endColor = colors[currentColorIndex];
+
+        // Llama al método de transición
+        transitarColor(startColor, endColor, 30); // 30 pasos para la transición
+
+        currentColorIndex = (currentColorIndex + 1) % colors.length; // Cicla a través de los colores
+    }
+
+    private void ajustarImagen() {
         // Cargar la imagen
         ImageIcon imageIcon = new ImageIcon(getClass().getResource("/recursos/estadio.png"));
-        
+
         // Obtener las dimensiones del JLabel
         int width = estadioImage.getWidth();
         int height = estadioImage.getHeight();
-        
+
         // Redimensionar la imagen para que se ajuste al JLabel
         Image image = imageIcon.getImage();
         Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
-        
+
         // Establecer la imagen redimensionada como icono del JLabel
         estadioImage.setIcon(scaledIcon);
     }
@@ -62,9 +110,11 @@ public class Menu_Principal extends javax.swing.JPanel {
     private void initComponents() {
 
         startButton = new javax.swing.JButton();
-        aboutusButton = new javax.swing.JButton();
+        aboutUsButton = new javax.swing.JButton();
+        aboutTheGameButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
         exitButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         estadioImage = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(626, 417));
@@ -86,18 +136,31 @@ public class Menu_Principal extends javax.swing.JPanel {
         });
         add(startButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 120, 50));
 
-        aboutusButton.setText("About us");
-        aboutusButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        aboutUsButton.setText("About Us");
+        aboutUsButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                aboutusButtonMouseClicked(evt);
+                aboutUsButtonMouseClicked(evt);
             }
         });
-        aboutusButton.addActionListener(new java.awt.event.ActionListener() {
+        aboutUsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aboutusButtonActionPerformed(evt);
+                aboutUsButtonActionPerformed(evt);
             }
         });
-        add(aboutusButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 120, 50));
+        add(aboutUsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 120, 50));
+
+        aboutTheGameButton.setText("About The Game");
+        aboutTheGameButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                aboutTheGameButtonMouseClicked(evt);
+            }
+        });
+        aboutTheGameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutTheGameButtonActionPerformed(evt);
+            }
+        });
+        add(aboutTheGameButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 120, 50));
 
         exitButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         exitButton.setForeground(new java.awt.Color(0, 0, 255));
@@ -141,9 +204,11 @@ public class Menu_Principal extends javax.swing.JPanel {
         });
         add(exitButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, 120, 50));
 
+        jLabel1.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
+        jLabel1.setText("MOVIMIENTO TÁCTICO");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, -1, -1));
+
         estadioImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/estadio.png"))); // NOI18N
-        estadioImage.setMaximumSize(new java.awt.Dimension(626, 417));
-        estadioImage.setPreferredSize(new java.awt.Dimension(626, 417));
         estadioImage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 estadioImageMouseClicked(evt);
@@ -167,7 +232,7 @@ public class Menu_Principal extends javax.swing.JPanel {
     }//GEN-LAST:event_startButtonMouseClicked
 
     private void exitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseClicked
-     System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_exitButtonMouseClicked
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
@@ -175,18 +240,18 @@ public class Menu_Principal extends javax.swing.JPanel {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void exitButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseEntered
-       exitButton.setForeground(WHITE);
+        exitButton.setForeground(WHITE);
     }//GEN-LAST:event_exitButtonMouseEntered
 
     private void exitButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseReleased
-    
+
     }//GEN-LAST:event_exitButtonMouseReleased
 
-    private void aboutusButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutusButtonMouseClicked
+    private void aboutTheGameButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutTheGameButtonMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_aboutusButtonMouseClicked
+    }//GEN-LAST:event_aboutTheGameButtonMouseClicked
 
-    private void aboutusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutusButtonActionPerformed
+    private void aboutTheGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutTheGameButtonActionPerformed
         About_Us au = null;
         try {
             au = new About_Us();
@@ -194,11 +259,11 @@ public class Menu_Principal extends javax.swing.JPanel {
             Logger.getLogger(Menu_Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
         au.setVisible(true);
-       
-    }//GEN-LAST:event_aboutusButtonActionPerformed
+
+    }//GEN-LAST:event_aboutTheGameButtonActionPerformed
 
     private void startButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startButtonMouseEntered
-        
+
     }//GEN-LAST:event_startButtonMouseEntered
 
     private void exitButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButton2MouseClicked
@@ -214,15 +279,28 @@ public class Menu_Principal extends javax.swing.JPanel {
     }//GEN-LAST:event_exitButton2ActionPerformed
 
     private void exitButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseExited
-           exitButton.setForeground(BLUE);
+        exitButton.setForeground(BLUE);
     }//GEN-LAST:event_exitButtonMouseExited
+
+    private void aboutUsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutUsButtonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aboutUsButtonMouseClicked
+
+    private void aboutUsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutUsButtonActionPerformed
+        System.out.println("Button clicked"); // Depuración
+        AboutUs au = new AboutUs();
+        au.setVisible(true);
+
+    }//GEN-LAST:event_aboutUsButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton aboutusButton;
+    private javax.swing.JButton aboutTheGameButton;
+    private javax.swing.JButton aboutUsButton;
     private javax.swing.JLabel estadioImage;
     private javax.swing.JButton exitButton;
     private javax.swing.JButton exitButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton startButton;
     // End of variables declaration//GEN-END:variables
 }
