@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Alfonso/Documents/EDD_II/Movimiento_Tactico/src/vista/Main.java</file>
-            <file>file:/C:/Users/Alfonso/Documents/EDD_II/Movimiento_Tactico/src/modelo/ManejadorEquipos.java</file>
-            <file>file:/C:/Users/Alfonso/Documents/EDD_II/Movimiento_Tactico/src/radar/Radar.java</file>
-            <file>file:/C:/Users/Alfonso/Documents/EDD_II/Movimiento_Tactico/src/modelo/Circulo.java</file>
-            <file>file:/C:/Users/Alfonso/Documents/EDD_II/Movimiento_Tactico/archivos/equipos.csv</file>
-            <file>file:/C:/Users/Alfonso/Documents/EDD_II/Movimiento_Tactico/src/radar/pnlRadar.java</file>
-            <file>file:/C:/Users/Alfonso/Documents/EDD_II/Movimiento_Tactico/src/vista/pnlJugadores.java</file>
+            <file>file:/C:/Users/Alfonso/Documents/EDD_II/Movimiento_Tactico/src/modelo/FloydWarshall.java</file>
+            <file>file:/C:/Users/Alfonso/Documents/EDD_II/Movimiento_Tactico/src/modelo/Campo.java</file>
+            <file>file:/C:/Users/Alfonso/Documents/EDD_II/Movimiento_Tactico/src/vista/Menu_Principal.java</file>
         </group>
     </open-files>
 </project-private>

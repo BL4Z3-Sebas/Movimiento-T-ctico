@@ -3,6 +3,7 @@ package modelo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.PriorityQueue;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -199,5 +200,45 @@ public class Campo {
 
         // Devolver el camino (o realizar otras acciones)
         return caminoOptimo;
+    }
+
+    public int[][] matrizDistancia(int criterio) {
+        int[][] distancias = new int[11][11];
+        for (int i = 0; i < 11; i++) {
+            Jugador j1 = jugadores.get(i);
+            for (int j = 0; j < 11; j++) {
+                Jugador j2 = jugadores.get(j);
+                if (i == j) {
+                    distancias[i][j] = 0;
+                } else {
+                    int dist = 0;
+                    switch (criterio) {
+                        case 1:
+                            dist = j1.getVelocidad() + j2.getVelocidad();
+                            break;
+                        case 2:
+                            dist = j1.getPosesion() + j2.getPosesion();
+                            break;
+                        case 3:
+                            dist = j1.getRemate() + j1.getRemate();
+                            break;
+                        default:
+                            System.out.println("Criterio inválido.");
+                    }
+                    distancias[i][j] = dist;
+                }
+            }
+        }
+        return distancias;
+    }
+
+    public String[][] matrizRecorrido() {
+        String[][] matriz = new String[11][11];
+        for (int i = 0; i < 11; i++) {
+            for (int j = 0; j < 11; j++) {
+                matriz[i][j] = jugadores.get(j).getNombre();
+            }
+        }
+        return matriz;
     }
 }
