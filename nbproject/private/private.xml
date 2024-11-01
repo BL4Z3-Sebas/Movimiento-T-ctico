@@ -3,19 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/andre/Desktop/Movimiento-Tactico/src/Vista/pnlJugadores.java</file>
-            <file>file:/C:/Users/andre/Desktop/Movimiento-Tactico/src/reader/LeerMatriz.java</file>
-            <file>file:/C:/Users/andre/Desktop/Movimiento-Tactico/src/Vista/Movimiento_Tactico.java</file>
-            <file>file:/C:/Users/andre/Desktop/Movimiento-Tactico/src/reader/LeerJugadores.java</file>
-            <file>file:/C:/Users/andre/Desktop/Movimiento-Tactico/src/Modelo/Adyacencia.java</file>
-            <file>file:/C:/Users/andre/Desktop/Movimiento-Tactico/src/recursos/matriz_adyacencia.csv</file>
-            <file>file:/C:/Users/andre/Desktop/Movimiento-Tactico/src/Modelo/Jugador.java</file>
-            <file>file:/C:/Users/andre/Desktop/Movimiento-Tactico/src/Modelo/Equipo.java</file>
-            <file>file:/C:/Users/andre/Desktop/Movimiento-Tactico/src/Modelo/Camino.java</file>
-            <file>file:/C:/Users/andre/Desktop/Movimiento-Tactico/src/recursos/jugadores.csv</file>
-            <file>file:/C:/Users/andre/Desktop/Movimiento-Tactico/src/Modelo/Campo.java</file>
-            <file>file:/C:/Users/andre/Desktop/Movimiento-Tactico/src/Modelo/Formaciones.java</file>
-            <file>file:/C:/Users/andre/Desktop/Movimiento-Tactico/src/Vista/Main.java</file>
+            <file>file:/C:/Users/Alfonso/Documents/EDD_II/Movimiento_Tactico/src/modelo/Campo.java</file>
+            <file>file:/C:/Users/Alfonso/Documents/EDD_II/Movimiento_Tactico/src/vista/Menu_Principal.java</file>
         </group>
     </open-files>
 </project-private>

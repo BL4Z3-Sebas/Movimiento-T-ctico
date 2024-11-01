@@ -1,15 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package vista;
-
 
 import static java.awt.Color.BLUE;
 import static java.awt.Color.WHITE;
 import java.awt.Image;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,37 +12,15 @@ import javax.swing.ImageIcon;
  *
  * @author andre
  */
-public class Menu_Principal extends javax.swing.JPanel {
+public class pnlMainMenu extends javax.swing.JPanel {
 
     /**
      * Creates new form Menu_Principal
      */
-    public Menu_Principal() {
+    ImageIcon fondo = new ImageIcon("imagenes/estadio.png");
+
+    public pnlMainMenu() {
         initComponents();
-        
-         estadioImage.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                ajustarImagen();
-            }
-        });
-         
-    }
-     private void ajustarImagen() {
-        // Cargar la imagen
-        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/recursos/estadio.png"));
-        
-        // Obtener las dimensiones del JLabel
-        int width = estadioImage.getWidth();
-        int height = estadioImage.getHeight();
-        
-        // Redimensionar la imagen para que se ajuste al JLabel
-        Image image = imageIcon.getImage();
-        Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(scaledImage);
-        
-        // Establecer la imagen redimensionada como icono del JLabel
-        estadioImage.setIcon(scaledIcon);
     }
 
     /**
@@ -141,15 +112,13 @@ public class Menu_Principal extends javax.swing.JPanel {
         });
         add(exitButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, 120, 50));
 
-        estadioImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/estadio.png"))); // NOI18N
-        estadioImage.setMaximumSize(new java.awt.Dimension(626, 417));
-        estadioImage.setPreferredSize(new java.awt.Dimension(626, 417));
+        estadioImage.setIcon(new ImageIcon(fondo.getImage().getScaledInstance(1366, 768, Image.SCALE_SMOOTH)));
         estadioImage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 estadioImageMouseClicked(evt);
             }
         });
-        add(estadioImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 420));
+        add(estadioImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 768));
     }// </editor-fold>//GEN-END:initComponents
 
     private void estadioImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estadioImageMouseClicked
@@ -167,7 +136,7 @@ public class Menu_Principal extends javax.swing.JPanel {
     }//GEN-LAST:event_startButtonMouseClicked
 
     private void exitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseClicked
-     System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_exitButtonMouseClicked
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
@@ -175,11 +144,11 @@ public class Menu_Principal extends javax.swing.JPanel {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void exitButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseEntered
-       exitButton.setForeground(WHITE);
+        exitButton.setForeground(WHITE);
     }//GEN-LAST:event_exitButtonMouseEntered
 
     private void exitButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseReleased
-    
+
     }//GEN-LAST:event_exitButtonMouseReleased
 
     private void aboutusButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutusButtonMouseClicked
@@ -191,14 +160,14 @@ public class Menu_Principal extends javax.swing.JPanel {
         try {
             au = new About_Us();
         } catch (IOException ex) {
-            Logger.getLogger(Menu_Principal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(pnlMainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
         au.setVisible(true);
-       
+
     }//GEN-LAST:event_aboutusButtonActionPerformed
 
     private void startButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startButtonMouseEntered
-        
+
     }//GEN-LAST:event_startButtonMouseEntered
 
     private void exitButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButton2MouseClicked
@@ -214,9 +183,8 @@ public class Menu_Principal extends javax.swing.JPanel {
     }//GEN-LAST:event_exitButton2ActionPerformed
 
     private void exitButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseExited
-           exitButton.setForeground(BLUE);
+        exitButton.setForeground(BLUE);
     }//GEN-LAST:event_exitButtonMouseExited
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aboutusButton;

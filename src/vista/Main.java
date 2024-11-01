@@ -14,6 +14,7 @@ public class Main extends javax.swing.JFrame {
 
     ImageIcon cesped = new ImageIcon("imagenes/cesped_p.jpg");
     ImageIcon lineas = new ImageIcon("imagenes/lineas_blancas.png");
+    ImageIcon fondo = new ImageIcon("imagenes/estadio.png");
     pnlJugadores cancha;
     pnlRadar radar;
 
@@ -30,8 +31,8 @@ public class Main extends javax.swing.JFrame {
         pnlCampo.setSize(1366, 768);
         pnlCampo.setLocation(0, 0);
 
-        pnlMenu.setSize(660, 688);
-        pnlMenu.setLocation(74, 40);
+        pnlSeleccion.setSize(660, 688);
+        pnlSeleccion.setLocation(74, 40);
 
         radar = new pnlRadar();
         radar.setSize(500, 300);
@@ -40,7 +41,7 @@ public class Main extends javax.swing.JFrame {
         radar.actualizarGrafico(70, 20, 95);
 
         pnlBG.add(radar);
-        pnlBG.add(pnlMenu);
+        pnlBG.add(pnlSeleccion);
         pnlBG.add(cancha);
         pnlBG.add(pnlCampo);
     }
@@ -55,21 +56,88 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlCampo = new javax.swing.JPanel();
+        pnlSeleccion1 = new javax.swing.JPanel();
+        lblTitulo1 = new javax.swing.JLabel();
+        btnAceptar1 = new javax.swing.JButton();
+        btnSiguiente1 = new javax.swing.JButton();
+        btnAnterior1 = new javax.swing.JButton();
+        lblSeleccionar1 = new javax.swing.JLabel();
+        lblEquipo1 = new javax.swing.JLabel();
         pnlSombra = new javax.swing.JPanel();
         lblCancha = new javax.swing.JLabel();
         pnlCesped = new javax.swing.JLabel();
-        pnlMenu = new javax.swing.JPanel();
+        pnlSeleccion = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         btnAceptar = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
         btnAnterior = new javax.swing.JButton();
         lblSeleccionar = new javax.swing.JLabel();
         lblEquipo = new javax.swing.JLabel();
+        pnlMenu = new javax.swing.JPanel();
+        startButton = new javax.swing.JButton();
+        aboutusButton = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        estadioImage = new javax.swing.JLabel();
         pnlSombra1 = new javax.swing.JPanel();
         pnlBG = new javax.swing.JPanel();
         lblCerrar = new javax.swing.JLabel();
 
+        pnlCampo.setPreferredSize(new java.awt.Dimension(1366, 768));
         pnlCampo.setLayout(null);
+
+        pnlSeleccion1.setBackground(new Color(0, 0, 0, 70));
+        pnlSeleccion1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        pnlSeleccion1.setMinimumSize(new java.awt.Dimension(660, 688));
+        pnlSeleccion1.setPreferredSize(new java.awt.Dimension(660, 688));
+        pnlSeleccion1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTitulo1.setFont(new java.awt.Font("Footlight MT Light", 1, 56)); // NOI18N
+        lblTitulo1.setForeground(new java.awt.Color(255, 204, 51));
+        lblTitulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo1.setText("Movimiento Táctico");
+        pnlSeleccion1.add(lblTitulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 80));
+
+        btnAceptar1.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
+        btnAceptar1.setForeground(new java.awt.Color(255, 255, 255));
+        btnAceptar1.setText("Aceptar");
+        pnlSeleccion1.add(btnAceptar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 610, 140, 40));
+
+        btnSiguiente1.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
+        btnSiguiente1.setForeground(new java.awt.Color(255, 255, 255));
+        btnSiguiente1.setText("Siguiente >");
+        btnSiguiente1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguiente1ActionPerformed(evt);
+            }
+        });
+        pnlSeleccion1.add(btnSiguiente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, 140, 40));
+
+        btnAnterior1.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
+        btnAnterior1.setForeground(new java.awt.Color(255, 255, 255));
+        btnAnterior1.setText("< Anterior");
+        btnAnterior1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnterior1ActionPerformed(evt);
+            }
+        });
+        pnlSeleccion1.add(btnAnterior1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 140, 40));
+
+        lblSeleccionar1.setBackground(new java.awt.Color(255, 255, 255));
+        lblSeleccionar1.setFont(new java.awt.Font("Footlight MT Light", 0, 24)); // NOI18N
+        lblSeleccionar1.setForeground(new java.awt.Color(255, 255, 255));
+        lblSeleccionar1.setText("Seleccionar equipo:");
+        pnlSeleccion1.add(lblSeleccionar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 260, 40));
+
+        lblEquipo1.setBackground(new Color(255, 225, 255, 50));
+        lblEquipo1.setFont(new java.awt.Font("Footlight MT Light", 0, 28)); // NOI18N
+        lblEquipo1.setForeground(new java.awt.Color(255, 255, 255));
+        lblEquipo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEquipo1.setText("Equipo 1");
+        lblEquipo1.setOpaque(true);
+        pnlSeleccion1.add(lblEquipo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 260, 40));
+
+        pnlCampo.add(pnlSeleccion1);
+        pnlSeleccion1.setBounds(74, 40, 660, 688);
 
         pnlSombra.setBackground(new Color(0, 0, 0, 70));
         pnlSombra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -91,22 +159,22 @@ public class Main extends javax.swing.JFrame {
         pnlCampo.add(pnlCesped);
         pnlCesped.setBounds(0, 0, 1366, 768);
 
-        pnlMenu.setBackground(new Color(0, 0, 0, 70));
-        pnlMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        pnlMenu.setMinimumSize(new java.awt.Dimension(660, 688));
-        pnlMenu.setPreferredSize(new java.awt.Dimension(660, 688));
-        pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlSeleccion.setBackground(new Color(0, 0, 0, 70));
+        pnlSeleccion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        pnlSeleccion.setMinimumSize(new java.awt.Dimension(660, 688));
+        pnlSeleccion.setPreferredSize(new java.awt.Dimension(660, 688));
+        pnlSeleccion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTitulo.setFont(new java.awt.Font("Footlight MT Light", 1, 56)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 204, 51));
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Movimiento Táctico");
-        pnlMenu.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 80));
+        pnlSeleccion.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 80));
 
         btnAceptar.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
         btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
         btnAceptar.setText("Aceptar");
-        pnlMenu.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 610, 140, 40));
+        pnlSeleccion.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 610, 140, 40));
 
         btnSiguiente.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
         btnSiguiente.setForeground(new java.awt.Color(255, 255, 255));
@@ -116,7 +184,7 @@ public class Main extends javax.swing.JFrame {
                 btnSiguienteActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, 140, 40));
+        pnlSeleccion.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, 140, 40));
 
         btnAnterior.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
         btnAnterior.setForeground(new java.awt.Color(255, 255, 255));
@@ -126,13 +194,13 @@ public class Main extends javax.swing.JFrame {
                 btnAnteriorActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnAnterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 140, 40));
+        pnlSeleccion.add(btnAnterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 140, 40));
 
         lblSeleccionar.setBackground(new java.awt.Color(255, 255, 255));
         lblSeleccionar.setFont(new java.awt.Font("Footlight MT Light", 0, 24)); // NOI18N
         lblSeleccionar.setForeground(new java.awt.Color(255, 255, 255));
         lblSeleccionar.setText("Seleccionar equipo:");
-        pnlMenu.add(lblSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 260, 40));
+        pnlSeleccion.add(lblSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 260, 40));
 
         lblEquipo.setBackground(new Color(255, 225, 255, 50));
         lblEquipo.setFont(new java.awt.Font("Footlight MT Light", 0, 28)); // NOI18N
@@ -140,7 +208,66 @@ public class Main extends javax.swing.JFrame {
         lblEquipo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEquipo.setText("Equipo 1");
         lblEquipo.setOpaque(true);
-        pnlMenu.add(lblEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 260, 40));
+        pnlSeleccion.add(lblEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 260, 40));
+
+        pnlMenu.setPreferredSize(new java.awt.Dimension(626, 417));
+        pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        startButton.setFont(new java.awt.Font("Footlight MT Light", 0, 36)); // NOI18N
+        startButton.setText("Comenzar");
+        startButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                startButtonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                startButtonMouseEntered(evt);
+            }
+        });
+        startButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startButtonActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(startButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(558, 240, 250, 60));
+
+        aboutusButton.setFont(new java.awt.Font("Footlight MT Light", 0, 36)); // NOI18N
+        aboutusButton.setText("Acerca de");
+        aboutusButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                aboutusButtonMouseClicked(evt);
+            }
+        });
+        aboutusButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutusButtonActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(aboutusButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(558, 300, 250, 60));
+
+        btnSalir.setFont(new java.awt.Font("Footlight MT Light", 0, 36)); // NOI18N
+        btnSalir.setText("Salir");
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSalirMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalirMouseEntered(evt);
+            }
+        });
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(558, 360, 250, 60));
+
+        estadioImage.setIcon(new ImageIcon(fondo.getImage().getScaledInstance(1366, 768, Image.SCALE_SMOOTH)));
+        estadioImage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                estadioImageMouseClicked(evt);
+            }
+        });
+        pnlMenu.add(estadioImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 768));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -196,7 +323,6 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         lblCerrar.setOpaque(true);
         lblCerrar.setBackground(new Color(204, 0, 0));
-        lblCerrar.setForeground(new Color(255, 255, 255));
         lblCerrar.repaint();
     }//GEN-LAST:event_lblCerrarMouseEntered
 
@@ -227,6 +353,52 @@ public class Main extends javax.swing.JFrame {
         repaint();
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
+    private void startButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startButtonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_startButtonMouseClicked
+
+    private void startButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startButtonMouseEntered
+
+    }//GEN-LAST:event_startButtonMouseEntered
+
+    private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
+        Main main = new Main();
+        main.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_startButtonActionPerformed
+
+    private void aboutusButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutusButtonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aboutusButtonMouseClicked
+
+    private void aboutusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutusButtonActionPerformed
+
+    }//GEN-LAST:event_aboutusButtonActionPerformed
+
+    private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalirMouseClicked
+
+    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalirMouseEntered
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void estadioImageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estadioImageMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_estadioImageMouseClicked
+
+    private void btnSiguiente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguiente1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSiguiente1ActionPerformed
+
+    private void btnAnterior1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnterior1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAnterior1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -240,24 +412,36 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton aboutusButton;
     private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnAceptar1;
     private javax.swing.JButton btnAnterior;
+    private javax.swing.JButton btnAnterior1;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnSiguiente;
+    private javax.swing.JButton btnSiguiente1;
+    private javax.swing.JLabel estadioImage;
     private javax.swing.JLabel lblCancha;
     private javax.swing.JLabel lblCerrar;
     private javax.swing.JLabel lblEquipo;
+    private javax.swing.JLabel lblEquipo1;
     private javax.swing.JLabel lblSeleccionar;
+    private javax.swing.JLabel lblSeleccionar1;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblTitulo1;
     private javax.swing.JPanel pnlBG;
     private javax.swing.JPanel pnlCampo;
     private javax.swing.JLabel pnlCesped;
     private javax.swing.JPanel pnlMenu;
+    private javax.swing.JPanel pnlSeleccion;
+    private javax.swing.JPanel pnlSeleccion1;
     private javax.swing.JPanel pnlSombra;
     private javax.swing.JPanel pnlSombra1;
+    private javax.swing.JButton startButton;
     // End of variables declaration//GEN-END:variables
 
     //Fuente para el menu principal Footlight o Goudy Old Style
     private void mostrarEquipo() {
-        
+
     }
 }
