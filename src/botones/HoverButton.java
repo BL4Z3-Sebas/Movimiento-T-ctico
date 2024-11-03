@@ -13,12 +13,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class HoverButton extends CustomButton {
+
     public HoverButton(String text) {
         super(text);
-        
+
         // Guardar el color original
         Color originalColor = getBackground();
-        
+
         // Agregar un listener para cambiar el color al pasar el mouse
         addMouseListener(new MouseAdapter() {
             @Override
@@ -33,4 +34,3 @@ public class HoverButton extends CustomButton {
         });
     }
 }
-

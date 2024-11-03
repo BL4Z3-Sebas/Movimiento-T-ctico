@@ -58,7 +58,7 @@ public class ManejadorEquipos {
     public ArrayList<ArrayList> leerEquipoAnterior(String equipoActual) {
         try (BufferedReader br = new BufferedReader(new FileReader("archivos/equipos.csv"))) {
             String linea;
-            
+
             if (equipoActual == null) {
                 return leerEquipo(null);
             }

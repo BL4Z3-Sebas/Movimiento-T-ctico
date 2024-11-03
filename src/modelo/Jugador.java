@@ -62,8 +62,8 @@ public class Jugador {
         this.adyacentes.add(jugador);
         jugador.getJugadores().add(this);
     }
-    
-    public void asignarListaAdyacencia(ArrayList lista_adyacencia){
+
+    public void asignarListaAdyacencia(ArrayList lista_adyacencia) {
         this.adyacentes = lista_adyacencia;
     }
 

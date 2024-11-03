@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class LeerMatriz{
+public class LeerMatriz {
 
     public static int[][] leerMatriz(String rutaArchivo) {
         int[][] matriz = new int[11][11];  // Suponiendo que tienes 11 jugadores
@@ -12,7 +12,7 @@ public class LeerMatriz{
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
             int fila = 0;
-            
+
             // Leer la primera línea y descartarla (nombres de los jugadores en la primera fila)
             br.readLine();
 
@@ -46,5 +46,3 @@ public class LeerMatriz{
         return matriz;
     }
 }
-
-

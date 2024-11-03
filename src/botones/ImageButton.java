@@ -13,6 +13,7 @@ import javax.swing.JButton;
  * @author andre
  */
 public class ImageButton extends JButton {
+
     public ImageButton(String iconPath) {
         setIcon(new ImageIcon(getClass().getResource(iconPath)));
         setPreferredSize(new Dimension(100, 40));

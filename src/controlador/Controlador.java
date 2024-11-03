@@ -1,4 +1,4 @@
-package controlador; 
+package controlador;
 
 import modelo.ManejadorEquipos;
 import vista.Main;
@@ -8,7 +8,7 @@ import vista.Main;
  * @author Alfonso
  */
 public class Controlador {
-    
+
     private Main vista;
     private ManejadorEquipos modelo;
 
@@ -16,7 +16,5 @@ public class Controlador {
         this.vista = vista;
         this.modelo = modelo;
     }
-    
-    
-    
+
 }

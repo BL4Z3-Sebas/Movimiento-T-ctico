@@ -4,7 +4,6 @@
  */
 package vista;
 
-
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +19,7 @@ public class About_Us extends javax.swing.JFrame {
 
     /**
      * Creates new form About_Us
+     *
      * @throws java.io.IOException
      */
     public About_Us() throws IOException {
@@ -27,9 +27,8 @@ public class About_Us extends javax.swing.JFrame {
         customizeComponents();
         setIcon();
     }
-    
 
- private void customizeComponents() {
+    private void customizeComponents() {
         textArea.setEditable(false); // Hacer el JTextArea no editable
         textArea.setLineWrap(true); // Ajustar líneas automáticamente
         textArea.setWrapStyleWord(true); // Ajustar al final de las palabras
@@ -37,11 +36,13 @@ public class About_Us extends javax.swing.JFrame {
         this.setResizable(false);
         // Puedes agregar más configuraciones aquí según sea necesario
     }
-     private void setIcon() throws IOException  {
-         // Carga la imagen como un objeto Image
-         Image icon = ImageIO.read(getClass().getResourceAsStream("/recursos/icono.png"));
-         setIconImage(icon); // Establece la imagen como icono de la ventana
+
+    private void setIcon() throws IOException {
+        // Carga la imagen como un objeto Image
+        Image icon = ImageIO.read(getClass().getResourceAsStream("/recursos/icono.png"));
+        setIconImage(icon); // Establece la imagen como icono de la ventana
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

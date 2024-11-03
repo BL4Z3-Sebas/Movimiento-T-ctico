@@ -41,9 +41,10 @@ public class pnlJugadores extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setBackground(new Color(0, 0, 0, 0));
+        setPreferredSize(new java.awt.Dimension(516, 688));
         setLayout(null);
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

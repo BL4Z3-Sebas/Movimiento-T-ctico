@@ -1,5 +1,6 @@
 package radar;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -27,6 +28,7 @@ public class pnlRadar extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setBackground(new Color(0, 0, 0, 0));
         setMinimumSize(new java.awt.Dimension(500, 300));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -40,7 +42,6 @@ public class pnlRadar extends javax.swing.JPanel {
             .addGap(0, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
@@ -59,7 +60,7 @@ public class pnlRadar extends javax.swing.JPanel {
         radar.asignarDatosRadar(velocidad, posesion, remate);
         repaint(); // Repinta el panel para mostrar el nuevo gráfico
     }
-    
+
     public void actualizarGrafico(double[] promedio) {
         radar.asignarDatosRadar(promedio);
         repaint(); // Repinta el panel para mostrar el nuevo gráfico

@@ -1,8 +1,10 @@
+
 import java.awt.Color;
 import javax.swing.JFrame;
 import radar.pnlRadar;
 
 public class TestRadar {
+
     public static void main(String[] args) {
         JFrame frame = new JFrame("Radar");
         pnlRadar radarPanel = new pnlRadar();
