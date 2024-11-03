@@ -156,9 +156,9 @@ public class pnlMainMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_aboutusButtonMouseClicked
 
     private void aboutusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutusButtonActionPerformed
-        About_Us au = null;
+        AcercaDe au = null;
         try {
-            au = new About_Us();
+            au = new AcercaDe();
         } catch (IOException ex) {
             Logger.getLogger(pnlMainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }

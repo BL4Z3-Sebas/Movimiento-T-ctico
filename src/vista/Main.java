@@ -18,38 +18,27 @@ public class Main extends javax.swing.JFrame {
     ImageIcon cesped = new ImageIcon("imagenes/cesped_p.jpg");
     ImageIcon lineas = new ImageIcon("imagenes/lineas_blancas.png");
     ImageIcon fondo = new ImageIcon("imagenes/estadio.png");
+    ImageIcon atras = new ImageIcon("imagenes/backs.png");
+
+    ManejadorCampo mc = new ManejadorCampo();
+    ButtonGroup bg = new ButtonGroup();
+
     pnlJugadores cancha;
     pnlRadar radar;
     Campo campo;
-    ManejadorCampo mc = new ManejadorCampo();
-    ButtonGroup bg = new ButtonGroup();
 
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
-        campo = new Campo();
-        cancha = new pnlJugadores();
-        radar = new pnlRadar();
-        
-        cancha.setSize(516, 688);
-        cancha.setLocation(776, 40);
-
-        pnlCampo.setSize(1366, 768);
-        pnlCampo.setLocation(0, 0);
-
-        radar.setSize(500, 280);
-        radar.setLocation(154, 260);
+        cargarPaneles();
 
         bg.add(tbtn352);
         bg.add(tbtn4231);
         bg.add(tbtn433);
         bg.add(tbtn442);
 
-        pnlBG.add(radar);
-        pnlBG.add(cancha);
-        pnlBG.add(pnlCampo);
     }
 
     /**
@@ -76,10 +65,11 @@ public class Main extends javax.swing.JFrame {
         tbtn352 = new javax.swing.JToggleButton();
         tbtn442 = new javax.swing.JToggleButton();
         lblFormacion = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         pnlCesped = new javax.swing.JLabel();
         pnlMenu = new javax.swing.JPanel();
-        startButton = new javax.swing.JButton();
-        aboutusButton = new javax.swing.JButton();
+        btnComenzar = new javax.swing.JButton();
+        btnAcercaDe = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         estadioImage = new javax.swing.JLabel();
         pnlBG = new javax.swing.JPanel();
@@ -87,7 +77,7 @@ public class Main extends javax.swing.JFrame {
 
         pnlCampo.setMinimumSize(new java.awt.Dimension(1366, 768));
         pnlCampo.setPreferredSize(new java.awt.Dimension(1366, 768));
-        pnlCampo.setLayout(null);
+        pnlCampo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlSombra.setBackground(new Color(0, 0, 0, 70));
         pnlSombra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -102,8 +92,7 @@ public class Main extends javax.swing.JFrame {
         pnlSombra.add(lblCancha);
         lblCancha.setBounds(-30, -40, 576, 768);
 
-        pnlCampo.add(pnlSombra);
-        pnlSombra.setBounds(776, 40, 516, 688);
+        pnlCampo.add(pnlSombra, new org.netbeans.lib.awtextra.AbsoluteConstraints(776, 40, 516, 688));
 
         pnlSeleccion.setBackground(new Color(0, 0, 0, 70));
         pnlSeleccion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -200,63 +189,59 @@ public class Main extends javax.swing.JFrame {
         lblFormacion.setText("Formacion:");
         pnlSeleccion.add(lblFormacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 120, 40));
 
-        pnlCampo.add(pnlSeleccion);
-        pnlSeleccion.setBounds(74, 40, 660, 688);
+        pnlCampo.add(pnlSeleccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(74, 40, -1, -1));
+
+        jLabel1.setBackground(new java.awt.Color(0, 0, 204));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new ImageIcon(atras.getImage().getScaledInstance(18, 18, Image.SCALE_SMOOTH)));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel1MouseExited(evt);
+            }
+        });
+        pnlCampo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 25));
 
         pnlCesped.setIcon(new ImageIcon(cesped.getImage().getScaledInstance(1366, 768, Image.SCALE_SMOOTH)));
-        pnlCampo.add(pnlCesped);
-        pnlCesped.setBounds(0, 0, 1366, 768);
+        pnlCampo.add(pnlCesped, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 768));
 
         pnlMenu.setPreferredSize(new java.awt.Dimension(626, 417));
         pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        startButton.setFont(new java.awt.Font("Footlight MT Light", 0, 36)); // NOI18N
-        startButton.setText("Comenzar");
-        startButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                startButtonMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                startButtonMouseEntered(evt);
-            }
-        });
-        startButton.addActionListener(new java.awt.event.ActionListener() {
+        btnComenzar.setFont(new java.awt.Font("Footlight MT Light", 0, 30)); // NOI18N
+        btnComenzar.setForeground(new java.awt.Color(255, 255, 255));
+        btnComenzar.setText("Comenzar");
+        btnComenzar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startButtonActionPerformed(evt);
+                btnComenzarActionPerformed(evt);
             }
         });
-        pnlMenu.add(startButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(558, 240, 250, 60));
+        pnlMenu.add(btnComenzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 510, 250, 60));
 
-        aboutusButton.setFont(new java.awt.Font("Footlight MT Light", 0, 36)); // NOI18N
-        aboutusButton.setText("Acerca de");
-        aboutusButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                aboutusButtonMouseClicked(evt);
-            }
-        });
-        aboutusButton.addActionListener(new java.awt.event.ActionListener() {
+        btnAcercaDe.setFont(new java.awt.Font("Footlight MT Light", 0, 30)); // NOI18N
+        btnAcercaDe.setForeground(new java.awt.Color(255, 255, 255));
+        btnAcercaDe.setText("Acerca de");
+        btnAcercaDe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aboutusButtonActionPerformed(evt);
+                btnAcercaDeActionPerformed(evt);
             }
         });
-        pnlMenu.add(aboutusButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(558, 300, 250, 60));
+        pnlMenu.add(btnAcercaDe, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 580, 250, 60));
 
-        btnSalir.setFont(new java.awt.Font("Footlight MT Light", 0, 36)); // NOI18N
+        btnSalir.setFont(new java.awt.Font("Footlight MT Light", 0, 30)); // NOI18N
+        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
         btnSalir.setText("Salir");
-        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSalirMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnSalirMouseEntered(evt);
-            }
-        });
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
             }
         });
-        pnlMenu.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(558, 360, 250, 60));
+        pnlMenu.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 650, 250, 60));
 
         estadioImage.setIcon(new ImageIcon(fondo.getImage().getScaledInstance(1366, 768, Image.SCALE_SMOOTH)));
         estadioImage.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -273,7 +258,7 @@ public class Main extends javax.swing.JFrame {
 
         pnlBG.setLayout(null);
 
-        lblCerrar.setBackground(new java.awt.Color(102, 0, 0));
+        lblCerrar.setBackground(new java.awt.Color(204, 0, 0));
         lblCerrar.setFont(new java.awt.Font("Papyrus", 0, 36)); // NOI18N
         lblCerrar.setForeground(new java.awt.Color(255, 255, 255));
         lblCerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -314,7 +299,6 @@ public class Main extends javax.swing.JFrame {
     private void lblCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseEntered
         // TODO add your handling code here:
         lblCerrar.setOpaque(true);
-        lblCerrar.setBackground(new Color(204, 0, 0));
         lblCerrar.repaint();
     }//GEN-LAST:event_lblCerrarMouseEntered
 
@@ -331,35 +315,15 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lblCerrarMouseReleased
 
-    private void startButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_startButtonMouseClicked
+    private void btnComenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComenzarActionPerformed
+        pnlMenu.setVisible(false);
+        pnlCampo.setVisible(true);
+        radar.setVisible(true);
+    }//GEN-LAST:event_btnComenzarActionPerformed
 
-    private void startButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startButtonMouseEntered
-
-    }//GEN-LAST:event_startButtonMouseEntered
-
-    private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
-        Main main = new Main();
-        main.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_startButtonActionPerformed
-
-    private void aboutusButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aboutusButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_aboutusButtonMouseClicked
-
-    private void aboutusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutusButtonActionPerformed
-
-    }//GEN-LAST:event_aboutusButtonActionPerformed
-
-    private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalirMouseClicked
-
-    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalirMouseEntered
+    private void btnAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcercaDeActionPerformed
+        new AcercaDeFrame().setVisible(true);
+    }//GEN-LAST:event_btnAcercaDeActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         System.exit(0);
@@ -433,6 +397,25 @@ public class Main extends javax.swing.JFrame {
         repaint();
     }//GEN-LAST:event_tbtn442ActionPerformed
 
+    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
+        // TODO add your handling code here:
+        jLabel1.setOpaque(true);
+        jLabel1.repaint();
+    }//GEN-LAST:event_jLabel1MouseEntered
+
+    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
+        // TODO add your handling code here:
+        jLabel1.setOpaque(false);
+        jLabel1.repaint();
+    }//GEN-LAST:event_jLabel1MouseExited
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        pnlCampo.setVisible(false);
+        radar.setVisible(false);
+        pnlMenu.setVisible(true);
+    }//GEN-LAST:event_jLabel1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -446,12 +429,14 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton aboutusButton;
     private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnAcercaDe;
     private javax.swing.JButton btnAnterior;
+    private javax.swing.JButton btnComenzar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JLabel estadioImage;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblCancha;
     private javax.swing.JLabel lblCerrar;
     private javax.swing.JLabel lblEquipo;
@@ -464,7 +449,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlSeleccion;
     private javax.swing.JPanel pnlSombra;
-    private javax.swing.JButton startButton;
     private javax.swing.JToggleButton tbtn352;
     private javax.swing.JToggleButton tbtn4231;
     private javax.swing.JToggleButton tbtn433;
@@ -472,4 +456,28 @@ public class Main extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     //Fuente para el menu principal Footlight o Goudy Old Style
+    private void cargarPaneles() {
+        campo = new Campo();
+        cancha = new pnlJugadores();
+        radar = new pnlRadar();
+
+        radar.setSize(500, 280);
+        radar.setLocation(154, 260);
+        radar.setVisible(false);
+
+        cancha.setSize(516, 688);
+        cancha.setLocation(776, 40);
+
+        pnlCampo.setSize(1366, 768);
+        pnlCampo.setLocation(0, 0);
+        pnlCampo.setVisible(false);
+
+        pnlMenu.setSize(1366, 768);
+        pnlMenu.setLocation(0, 0);
+
+        pnlBG.add(radar);
+        pnlBG.add(cancha);
+        pnlBG.add(pnlCampo);
+        pnlBG.add(pnlMenu);
+    }
 }
