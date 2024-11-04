@@ -4,9 +4,12 @@ import radar.pnlRadar;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Color;
 import java.awt.Image;
+import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import modelo.Campo;
+import modelo.Jugador;
 import modelo.ManejadorCampo;
 
 /**
@@ -55,19 +58,34 @@ public class Main extends javax.swing.JFrame {
         lblCancha = new javax.swing.JLabel();
         pnlSeleccion = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
-        btnAceptar = new javax.swing.JButton();
+        btnContinuar = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
         btnAnterior = new javax.swing.JButton();
         lblSeleccionar = new javax.swing.JLabel();
         lblEquipo = new javax.swing.JLabel();
+        pnlEstrategia = new javax.swing.JPanel();
+        lblTitulo1 = new javax.swing.JLabel();
+        lblFormacion = new javax.swing.JLabel();
         tbtn4231 = new javax.swing.JToggleButton();
         tbtn433 = new javax.swing.JToggleButton();
         tbtn352 = new javax.swing.JToggleButton();
         tbtn442 = new javax.swing.JToggleButton();
-        lblFormacion = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lbl442 = new javax.swing.JLabel();
+        lbl4231 = new javax.swing.JLabel();
+        lbl433 = new javax.swing.JLabel();
+        lbl352 = new javax.swing.JLabel();
+        lblEstategia = new javax.swing.JLabel();
+        btnVelocidad = new javax.swing.JButton();
+        btnRemate = new javax.swing.JButton();
+        btnPosesion = new javax.swing.JButton();
+        lblVelocidad = new javax.swing.JLabel();
+        lblRemate = new javax.swing.JLabel();
+        lblPosesion = new javax.swing.JLabel();
+        lblAtras = new javax.swing.JLabel();
         pnlCesped = new javax.swing.JLabel();
         pnlMenu = new javax.swing.JPanel();
+        lbltitulo1 = new javax.swing.JLabel();
+        lbltitulo = new javax.swing.JLabel();
         btnComenzar = new javax.swing.JButton();
         btnAcercaDe = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -84,11 +102,6 @@ public class Main extends javax.swing.JFrame {
         pnlSombra.setLayout(null);
 
         lblCancha.setIcon(new ImageIcon(lineas.getImage().getScaledInstance(576, 768, Image.SCALE_SMOOTH)));
-        lblCancha.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblCanchaMouseClicked(evt);
-            }
-        });
         pnlSombra.add(lblCancha);
         lblCancha.setBounds(-30, -40, 576, 768);
 
@@ -104,13 +117,20 @@ public class Main extends javax.swing.JFrame {
         lblTitulo.setForeground(new java.awt.Color(255, 204, 51));
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Movimiento Táctico");
-        pnlSeleccion.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 80));
+        pnlSeleccion.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 80));
 
-        btnAceptar.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
-        btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAceptar.setText("Aceptar");
-        pnlSeleccion.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 610, 140, 40));
+        btnContinuar.setBackground(new java.awt.Color(153, 153, 153));
+        btnContinuar.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
+        btnContinuar.setForeground(new java.awt.Color(255, 255, 255));
+        btnContinuar.setText("Continuar");
+        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContinuarActionPerformed(evt);
+            }
+        });
+        pnlSeleccion.add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 610, 140, 40));
 
+        btnSiguiente.setBackground(new java.awt.Color(153, 153, 153));
         btnSiguiente.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
         btnSiguiente.setForeground(new java.awt.Color(255, 255, 255));
         btnSiguiente.setText("Siguiente");
@@ -119,8 +139,9 @@ public class Main extends javax.swing.JFrame {
                 btnSiguienteActionPerformed(evt);
             }
         });
-        pnlSeleccion.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, 140, 40));
+        pnlSeleccion.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 120, 140, 40));
 
+        btnAnterior.setBackground(new java.awt.Color(153, 153, 153));
         btnAnterior.setFont(new java.awt.Font("Footlight MT Light", 0, 20)); // NOI18N
         btnAnterior.setForeground(new java.awt.Color(255, 255, 255));
         btnAnterior.setText("Anterior");
@@ -129,7 +150,7 @@ public class Main extends javax.swing.JFrame {
                 btnAnteriorActionPerformed(evt);
             }
         });
-        pnlSeleccion.add(btnAnterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 140, 40));
+        pnlSeleccion.add(btnAnterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 140, 40));
 
         lblSeleccionar.setBackground(new java.awt.Color(255, 255, 255));
         lblSeleccionar.setFont(new java.awt.Font("Footlight MT Light", 0, 24)); // NOI18N
@@ -142,8 +163,27 @@ public class Main extends javax.swing.JFrame {
         lblEquipo.setForeground(new java.awt.Color(255, 255, 255));
         lblEquipo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEquipo.setOpaque(true);
-        pnlSeleccion.add(lblEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 260, 40));
+        pnlSeleccion.add(lblEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 260, 40));
 
+        pnlCampo.add(pnlSeleccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(74, 40, 660, 688));
+
+        pnlEstrategia.setBackground(new Color(0, 0, 0, 70));
+        pnlEstrategia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        pnlEstrategia.setPreferredSize(new java.awt.Dimension(660, 688));
+        pnlEstrategia.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTitulo1.setFont(new java.awt.Font("Footlight MT Light", 1, 56)); // NOI18N
+        lblTitulo1.setForeground(new java.awt.Color(255, 204, 51));
+        lblTitulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo1.setText("Movimiento Táctico");
+        pnlEstrategia.add(lblTitulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 80));
+
+        lblFormacion.setFont(new java.awt.Font("Footlight MT Light", 0, 24)); // NOI18N
+        lblFormacion.setForeground(new java.awt.Color(255, 255, 255));
+        lblFormacion.setText("Cambiar Formacion:");
+        pnlEstrategia.add(lblFormacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 230, 40));
+
+        tbtn4231.setBackground(new java.awt.Color(153, 153, 153));
         tbtn4231.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
         tbtn4231.setForeground(new java.awt.Color(255, 255, 255));
         tbtn4231.setText("4-2-3-1");
@@ -152,8 +192,9 @@ public class Main extends javax.swing.JFrame {
                 tbtn4231ActionPerformed(evt);
             }
         });
-        pnlSeleccion.add(tbtn4231, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 540, 100, 40));
+        pnlEstrategia.add(tbtn4231, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 130, 40));
 
+        tbtn433.setBackground(new java.awt.Color(153, 153, 153));
         tbtn433.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
         tbtn433.setForeground(new java.awt.Color(255, 255, 255));
         tbtn433.setText("4-3-3");
@@ -162,8 +203,9 @@ public class Main extends javax.swing.JFrame {
                 tbtn433ActionPerformed(evt);
             }
         });
-        pnlSeleccion.add(tbtn433, new org.netbeans.lib.awtextra.AbsoluteConstraints(405, 540, 100, 40));
+        pnlEstrategia.add(tbtn433, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 130, 40));
 
+        tbtn352.setBackground(new java.awt.Color(153, 153, 153));
         tbtn352.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
         tbtn352.setForeground(new java.awt.Color(255, 255, 255));
         tbtn352.setText("3-5-2");
@@ -172,8 +214,9 @@ public class Main extends javax.swing.JFrame {
                 tbtn352ActionPerformed(evt);
             }
         });
-        pnlSeleccion.add(tbtn352, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 540, 100, 40));
+        pnlEstrategia.add(tbtn352, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, 130, 40));
 
+        tbtn442.setBackground(new java.awt.Color(153, 153, 153));
         tbtn442.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
         tbtn442.setForeground(new java.awt.Color(255, 255, 255));
         tbtn442.setText("4-4-2");
@@ -182,30 +225,90 @@ public class Main extends javax.swing.JFrame {
                 tbtn442ActionPerformed(evt);
             }
         });
-        pnlSeleccion.add(tbtn442, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 540, 100, 40));
+        pnlEstrategia.add(tbtn442, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 130, 40));
 
-        lblFormacion.setFont(new java.awt.Font("Footlight MT Light", 0, 24)); // NOI18N
-        lblFormacion.setForeground(new java.awt.Color(255, 255, 255));
-        lblFormacion.setText("Formacion:");
-        pnlSeleccion.add(lblFormacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 120, 40));
+        lbl442.setIcon(new javax.swing.ImageIcon("C:\\Users\\Alfonso\\Documents\\EDD_II\\Movimiento_Tactico\\imagenes\\formaciones\\442.png")); // NOI18N
+        pnlEstrategia.add(lbl442, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 160, 120, 190));
 
-        pnlCampo.add(pnlSeleccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(74, 40, -1, -1));
+        lbl4231.setIcon(new javax.swing.ImageIcon("C:\\Users\\Alfonso\\Documents\\EDD_II\\Movimiento_Tactico\\imagenes\\formaciones\\4231.png")); // NOI18N
+        pnlEstrategia.add(lbl4231, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 160, 120, 190));
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 204));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new ImageIcon(atras.getImage().getScaledInstance(18, 18, Image.SCALE_SMOOTH)));
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel1MouseExited(evt);
+        lbl433.setIcon(new javax.swing.ImageIcon("C:\\Users\\Alfonso\\Documents\\EDD_II\\Movimiento_Tactico\\imagenes\\formaciones\\433.png")); // NOI18N
+        pnlEstrategia.add(lbl433, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 160, 120, 190));
+
+        lbl352.setIcon(new javax.swing.ImageIcon("C:\\Users\\Alfonso\\Documents\\EDD_II\\Movimiento_Tactico\\imagenes\\formaciones\\352.png")); // NOI18N
+        pnlEstrategia.add(lbl352, new org.netbeans.lib.awtextra.AbsoluteConstraints(495, 160, 120, 190));
+
+        lblEstategia.setFont(new java.awt.Font("Footlight MT Light", 0, 24)); // NOI18N
+        lblEstategia.setForeground(new java.awt.Color(255, 255, 255));
+        lblEstategia.setText("Cambiar Estrategia:");
+        pnlEstrategia.add(lblEstategia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 230, 40));
+
+        btnVelocidad.setBackground(new java.awt.Color(153, 153, 153));
+        btnVelocidad.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
+        btnVelocidad.setForeground(new java.awt.Color(255, 255, 255));
+        btnVelocidad.setText("Velocidad");
+        btnVelocidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVelocidadActionPerformed(evt);
             }
         });
-        pnlCampo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 25));
+        pnlEstrategia.add(btnVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 130, 40));
+
+        btnRemate.setBackground(new java.awt.Color(153, 153, 153));
+        btnRemate.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
+        btnRemate.setForeground(new java.awt.Color(255, 255, 255));
+        btnRemate.setText("Remate");
+        btnRemate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemateActionPerformed(evt);
+            }
+        });
+        pnlEstrategia.add(btnRemate, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 420, 130, 40));
+
+        btnPosesion.setBackground(new java.awt.Color(153, 153, 153));
+        btnPosesion.setFont(new java.awt.Font("Footlight MT Light", 0, 18)); // NOI18N
+        btnPosesion.setForeground(new java.awt.Color(255, 255, 255));
+        btnPosesion.setText("Posesion");
+        btnPosesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPosesionActionPerformed(evt);
+            }
+        });
+        pnlEstrategia.add(btnPosesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 420, 130, 40));
+
+        lblVelocidad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblVelocidad.setIcon(new javax.swing.ImageIcon("C:\\Users\\Alfonso\\Documents\\EDD_II\\Movimiento_Tactico\\imagenes\\poses\\velocidad.png")); // NOI18N
+        lblVelocidad.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        pnlEstrategia.add(lblVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, 130, 190));
+
+        lblRemate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRemate.setIcon(new javax.swing.ImageIcon("C:\\Users\\Alfonso\\Documents\\EDD_II\\Movimiento_Tactico\\imagenes\\poses\\remate.png")); // NOI18N
+        lblRemate.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        pnlEstrategia.add(lblRemate, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 470, 180, 190));
+
+        lblPosesion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPosesion.setIcon(new javax.swing.ImageIcon("C:\\Users\\Alfonso\\Documents\\EDD_II\\Movimiento_Tactico\\imagenes\\poses\\posesion.png")); // NOI18N
+        lblPosesion.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        pnlEstrategia.add(lblPosesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 470, 250, 190));
+
+        pnlCampo.add(pnlEstrategia, new org.netbeans.lib.awtextra.AbsoluteConstraints(74, 40, 660, 688));
+
+        lblAtras.setBackground(new java.awt.Color(0, 0, 204));
+        lblAtras.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAtras.setIcon(new ImageIcon(atras.getImage().getScaledInstance(18, 18, Image.SCALE_SMOOTH)));
+        lblAtras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAtrasMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblAtrasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblAtrasMouseExited(evt);
+            }
+        });
+        pnlCampo.add(lblAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 25));
 
         pnlCesped.setIcon(new ImageIcon(cesped.getImage().getScaledInstance(1366, 768, Image.SCALE_SMOOTH)));
         pnlCampo.add(pnlCesped, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, 768));
@@ -213,6 +316,17 @@ public class Main extends javax.swing.JFrame {
         pnlMenu.setPreferredSize(new java.awt.Dimension(626, 417));
         pnlMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lbltitulo1.setFont(new java.awt.Font("Footlight MT Light", 0, 80)); // NOI18N
+        lbltitulo1.setForeground(new java.awt.Color(255, 204, 51));
+        lbltitulo1.setText("Movimiento Tactico");
+        pnlMenu.add(lbltitulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, -1, -1));
+
+        lbltitulo.setFont(new java.awt.Font("Footlight MT Light", 0, 80)); // NOI18N
+        lbltitulo.setForeground(new Color(0, 50, 255, 150));
+        lbltitulo.setText("Movimiento Tactico");
+        pnlMenu.add(lbltitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 205, -1, -1));
+
+        btnComenzar.setBackground(new java.awt.Color(0, 0, 102));
         btnComenzar.setFont(new java.awt.Font("Footlight MT Light", 0, 30)); // NOI18N
         btnComenzar.setForeground(new java.awt.Color(255, 255, 255));
         btnComenzar.setText("Comenzar");
@@ -223,6 +337,7 @@ public class Main extends javax.swing.JFrame {
         });
         pnlMenu.add(btnComenzar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 510, 250, 60));
 
+        btnAcercaDe.setBackground(new java.awt.Color(0, 0, 102));
         btnAcercaDe.setFont(new java.awt.Font("Footlight MT Light", 0, 30)); // NOI18N
         btnAcercaDe.setForeground(new java.awt.Color(255, 255, 255));
         btnAcercaDe.setText("Acerca de");
@@ -233,6 +348,7 @@ public class Main extends javax.swing.JFrame {
         });
         pnlMenu.add(btnAcercaDe, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 580, 250, 60));
 
+        btnSalir.setBackground(new java.awt.Color(0, 0, 102));
         btnSalir.setFont(new java.awt.Font("Footlight MT Light", 0, 30)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
         btnSalir.setText("Salir");
@@ -286,11 +402,6 @@ public class Main extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblCanchaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCanchaMouseClicked
-        // TODO add your handling code here:
-        System.out.println(evt.getX() + ", " + evt.getY());
-    }//GEN-LAST:event_lblCanchaMouseClicked
-
     private void lblCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCerrarMouseClicked
         // TODO add your handling code here:
         System.exit(0);
@@ -319,6 +430,7 @@ public class Main extends javax.swing.JFrame {
         pnlMenu.setVisible(false);
         pnlCampo.setVisible(true);
         radar.setVisible(true);
+        cancha.setVisible(true);
     }//GEN-LAST:event_btnComenzarActionPerformed
 
     private void btnAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcercaDeActionPerformed
@@ -397,24 +509,93 @@ public class Main extends javax.swing.JFrame {
         repaint();
     }//GEN-LAST:event_tbtn442ActionPerformed
 
-    private void jLabel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseEntered
+    private void lblAtrasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAtrasMouseEntered
         // TODO add your handling code here:
-        jLabel1.setOpaque(true);
-        jLabel1.repaint();
-    }//GEN-LAST:event_jLabel1MouseEntered
+        lblAtras.setOpaque(true);
+        lblAtras.repaint();
+    }//GEN-LAST:event_lblAtrasMouseEntered
 
-    private void jLabel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseExited
+    private void lblAtrasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAtrasMouseExited
         // TODO add your handling code here:
-        jLabel1.setOpaque(false);
-        jLabel1.repaint();
-    }//GEN-LAST:event_jLabel1MouseExited
+        lblAtras.setOpaque(false);
+        lblAtras.repaint();
+    }//GEN-LAST:event_lblAtrasMouseExited
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    private void lblAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAtrasMouseClicked
         // TODO add your handling code here:
+        if (pnlEstrategia.isVisible()) {
+            pnlEstrategia.setVisible(false);
+            pnlSeleccion.setVisible(true);
+            radar.setVisible(true);
+            return;
+        }
+        cancha.setVisible(false);
         pnlCampo.setVisible(false);
         radar.setVisible(false);
         pnlMenu.setVisible(true);
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_lblAtrasMouseClicked
+
+    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
+        // TODO add your handling code here:
+        if (campo.getJugadores().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un equipo");
+            return;
+        }
+        radar.setVisible(false);
+        pnlSeleccion.setVisible(false);
+        pnlEstrategia.setVisible(true);
+        cancha.setVisible(true);
+    }//GEN-LAST:event_btnContinuarActionPerformed
+
+    private void btnVelocidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVelocidadActionPerformed
+        // TODO add your handling code here:
+        Jugador inicial = campo.getJugadores().get(0);
+        int num_finales = campo.getFormacion() % 10;
+        ArrayList<Jugador> finales = new ArrayList<>();
+        int k = 10;
+        do {
+            finales.add(campo.getJugadores().get(k));
+            k--;
+            num_finales--;
+        } while (num_finales > 0);
+        ArrayList<Jugador> camino = campo.recorridoVelocidad(inicial, finales);
+//        cancha.mostraJugadores(campo.getFormacion());
+        cancha.dibujarCamino(camino, campo, "velocidad");
+
+    }//GEN-LAST:event_btnVelocidadActionPerformed
+
+    private void btnRemateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemateActionPerformed
+        // TODO add your handling code here:
+        Jugador inicial = campo.getJugadores().get(0);
+        int num_finales = campo.getFormacion() % 10;
+        ArrayList<Jugador> finales = new ArrayList<>();
+        int k = 10;
+        do {
+            finales.add(campo.getJugadores().get(k));
+            k--;
+            num_finales--;
+        } while (num_finales > 0);
+        ArrayList<Jugador> camino = campo.recorridoRemate(inicial, finales);
+        cancha.dibujarCamino(camino, campo, "remate");
+//        cancha.repaint();
+    }//GEN-LAST:event_btnRemateActionPerformed
+
+    private void btnPosesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPosesionActionPerformed
+        // TODO add your handling code here:
+        Jugador inicial = campo.getJugadores().get(0);
+        int num_finales = campo.getFormacion() % 10;
+        ArrayList<Jugador> finales = new ArrayList<>();
+        int k = 10;
+        do {
+            finales.add(campo.getJugadores().get(k));
+            k--;
+            num_finales--;
+        } while (num_finales > 0);
+        ArrayList<Jugador> camino = campo.recorridoPosesion(inicial, finales);
+        cancha.dibujarCamino(camino, campo, "posesion");
+        cancha.revalidate();
+//        cancha.repaint();
+    }//GEN-LAST:event_btnPosesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -429,23 +610,38 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnAcercaDe;
     private javax.swing.JButton btnAnterior;
     private javax.swing.JButton btnComenzar;
+    private javax.swing.JButton btnContinuar;
+    private javax.swing.JButton btnPosesion;
+    private javax.swing.JButton btnRemate;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnSiguiente;
+    private javax.swing.JButton btnVelocidad;
     private javax.swing.JLabel estadioImage;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lbl352;
+    private javax.swing.JLabel lbl4231;
+    private javax.swing.JLabel lbl433;
+    private javax.swing.JLabel lbl442;
+    private javax.swing.JLabel lblAtras;
     private javax.swing.JLabel lblCancha;
     private javax.swing.JLabel lblCerrar;
     private javax.swing.JLabel lblEquipo;
+    private javax.swing.JLabel lblEstategia;
     private javax.swing.JLabel lblFormacion;
+    private javax.swing.JLabel lblPosesion;
+    private javax.swing.JLabel lblRemate;
     private javax.swing.JLabel lblSeleccionar;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblTitulo1;
+    private javax.swing.JLabel lblVelocidad;
+    private javax.swing.JLabel lbltitulo;
+    private javax.swing.JLabel lbltitulo1;
     private javax.swing.JPanel pnlBG;
     private javax.swing.JPanel pnlCampo;
     private javax.swing.JLabel pnlCesped;
+    private javax.swing.JPanel pnlEstrategia;
     private javax.swing.JPanel pnlMenu;
     private javax.swing.JPanel pnlSeleccion;
     private javax.swing.JPanel pnlSombra;
@@ -461,8 +657,8 @@ public class Main extends javax.swing.JFrame {
         cancha = new pnlJugadores();
         radar = new pnlRadar();
 
-        radar.setSize(500, 280);
-        radar.setLocation(154, 260);
+        radar.setSize(500, 340);
+        radar.setLocation(154, 250);
         radar.setVisible(false);
 
         cancha.setSize(516, 688);
@@ -474,6 +670,8 @@ public class Main extends javax.swing.JFrame {
 
         pnlMenu.setSize(1366, 768);
         pnlMenu.setLocation(0, 0);
+
+        pnlEstrategia.setVisible(false);
 
         pnlBG.add(radar);
         pnlBG.add(cancha);

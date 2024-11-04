@@ -3,7 +3,6 @@ package modelo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.PriorityQueue;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,6 +35,10 @@ public class Campo {
 
     public void setListaJugadores(ArrayList lista_jugadores) {
         this.jugadores = lista_jugadores;
+    }
+
+    public ArrayList<Jugador> getJugadores() {
+        return jugadores;
     }
 
     public void setMatrizAdyacencia(int[][] matriz_adyacencia) {
@@ -78,29 +81,19 @@ public class Campo {
     }
 
     //========================================================================//
-    public ArrayList<Jugador> recorridoVelocidad(String nombre1, ArrayList<String> nombresFinales) {
-        Jugador jugadorInicial = getJugador(nombre1);
-        ArrayList<Jugador> jugadoresFinales = new ArrayList<>();
-
-        for (String nombreFinal : nombresFinales) {
-            Jugador jugadorFinal = getJugador(nombreFinal);
-            if (jugadorFinal != null) {
-                jugadoresFinales.add(jugadorFinal);
-            }
-        }
-
-        if (jugadorInicial == null || jugadoresFinales.isEmpty()) {
-            System.out.println("Jugador no encontrado.");
-            return null;
-        }
-
-        ArrayList<Jugador> caminoOptimo = encontrarMejorCaminoOptimo(jugadorInicial, jugadoresFinales, "velocidad");
-
-        // Devolver el camino (o realizar otras acciones)
-        return caminoOptimo;
+    public ArrayList<Jugador> recorridoVelocidad(Jugador inicial, ArrayList<Jugador> jugadoresFinales) {
+        return encontrarCaminoOptimo(inicial, jugadoresFinales, "velocidad");
     }
 
-    private ArrayList<Jugador> encontrarMejorCaminoOptimo(Jugador jugadorInicial, ArrayList<Jugador> jugadoresFinales, String criterio) {
+    public ArrayList<Jugador> recorridoRemate(Jugador inicial, ArrayList<Jugador> jugadoresFinales) {
+        return encontrarCaminoOptimo(inicial, jugadoresFinales, "remate");
+    }
+
+    public ArrayList<Jugador> recorridoPosesion(Jugador inicial, ArrayList<Jugador> jugadoresFinales) {
+        return encontrarCaminoOptimo(inicial, jugadoresFinales, "posesion");
+    }
+
+    private ArrayList<Jugador> encontrarCaminoOptimo(Jugador inicial, ArrayList<Jugador> jugadoresFinales, String criterio) {
         int numJugadores = jugadores.size();
         boolean[] visitado = new boolean[numJugadores];
         int[] distancias = new int[numJugadores];
@@ -108,7 +101,7 @@ public class Campo {
 
         Arrays.fill(distancias, Integer.MAX_VALUE);
         Arrays.fill(predecesores, -1);
-        int indiceInicial = jugadores.indexOf(jugadorInicial);
+        int indiceInicial = jugadores.indexOf(inicial);
         distancias[indiceInicial] = 0;
 
         PriorityQueue<Integer> colaPrioridad = new PriorityQueue<>((a, b) -> Integer.compare(distancias[a], distancias[b]));
@@ -121,54 +114,46 @@ public class Campo {
             }
             visitado[indiceActual] = true;
 
+            // Si encontramos un jugador final con el camino más corto, detenemos la búsqueda
+            if (jugadoresFinales.contains(jugadores.get(indiceActual))) {
+                ArrayList<Jugador> caminoOptimo = new ArrayList<>();
+                for (int at = indiceActual; at != -1; at = predecesores[at]) {
+                    caminoOptimo.add(0, jugadores.get(at)); // Reconstruimos el camino en orden
+                }
+                return caminoOptimo; // Devolvemos el camino óptimo inmediatamente
+            }
+
+            // Relajación de aristas
             for (int i = 0; i < numJugadores; i++) {
-                if (matrizAdyacencia[indiceActual][i] == 1 && !visitado[i]) {
-                    int peso = 0;
-                    switch (criterio) {
-                        case "velocidad":
-                            peso = jugadores.get(i).getVelocidad();
-                            break;
-                        case "posesión":
-                            peso = jugadores.get(i).getPosesion();
-                            break;
-                        case "remate":
-                            peso = jugadores.get(i).getRemate();
-                            break;
-                        default:
-                            break;
-                    }
-                    int nuevaDistancia = distancias[indiceActual] + peso;
+                if (matrizAdyacencia[indiceActual][i] != 1 || visitado[i]) {
+                    continue;
+                }
+                int peso = 0;
+                switch (criterio) {
+                    case "velocidad":
+                        peso = jugadores.get(i).getVelocidad();
+                        break;
+                    case "posesion":
+                        peso = jugadores.get(i).getPosesion();
+                        break;
+                    case "remate":
+                        peso = jugadores.get(i).getRemate();
+                        break;
+                    default:
+                        break;
+                }
+                int nuevaDistancia = distancias[indiceActual] + peso;
 
-                    if (nuevaDistancia < distancias[i]) {
-                        distancias[i] = nuevaDistancia;
-                        predecesores[i] = indiceActual;
-                        colaPrioridad.offer(i);
-                    }
+                if (nuevaDistancia < distancias[i]) {
+                    distancias[i] = nuevaDistancia;
+                    predecesores[i] = indiceActual;
+                    colaPrioridad.offer(i);
                 }
             }
         }
 
-        // Encontrar el mejor camino a cualquier jugador final
-        ArrayList<Jugador> mejorCamino = null;
-        int mejorDistancia = Integer.MAX_VALUE;
-        for (Jugador jugadorFinal : jugadoresFinales) {
-            ArrayList<Jugador> caminoActual = new ArrayList<>();
-            int indiceFinal = jugadores.indexOf(jugadorFinal);
-            for (int at = indiceFinal; at != -1; at = predecesores[at]) {
-                caminoActual.add(0, jugadores.get(at)); // Agregar al principio
-            }
-
-            // Verificar si se encontró un camino y comparar distancias
-            if (!caminoActual.isEmpty() && caminoActual.get(0).equals(jugadorInicial)) {
-                int distanciaFinal = distancias[indiceFinal];
-                if (distanciaFinal < mejorDistancia) {
-                    mejorDistancia = distanciaFinal;
-                    mejorCamino = caminoActual;
-                }
-            }
-        }
-
-        return mejorCamino;
+        // Si no se encuentra ningún camino, devolvemos null o una lista vacía
+        return null;
     }
 
     public void imprimirMatriz(int[][] matriz) {
@@ -178,28 +163,6 @@ public class Campo {
             }
             System.out.print("\n");
         }
-    }
-
-    public ArrayList<Jugador> recorridoRemate(String nombre1, ArrayList<String> nombresFinales) {
-        Jugador jugadorInicial = getJugador(nombre1);
-        ArrayList<Jugador> jugadoresFinales = new ArrayList<>();
-
-        for (String nombreFinal : nombresFinales) {
-            Jugador jugadorFinal = getJugador(nombreFinal);
-            if (jugadorFinal != null) {
-                jugadoresFinales.add(jugadorFinal);
-            }
-        }
-
-        if (jugadorInicial == null || jugadoresFinales.isEmpty()) {
-            System.out.println("Jugador no encontrado.");
-            return null;
-        }
-
-        ArrayList<Jugador> caminoOptimo = encontrarMejorCaminoOptimo(jugadorInicial, jugadoresFinales, "remate");
-
-        // Devolver el camino (o realizar otras acciones)
-        return caminoOptimo;
     }
 
     public int[][] matrizDistancia(int criterio) {
